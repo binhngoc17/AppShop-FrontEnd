@@ -20,6 +20,9 @@ export default class CartView extends Component {
     incrQuantity(productId) {
         global.incrQuantity(productId);
     }
+    decrQuantity(productId) {
+        global.decrQuantity(productId);
+    }
     gotoProductDetail() {
         this.props.navigator.push({ name: 'PRODUCT_DETAIL' });
     }
@@ -54,7 +57,7 @@ export default class CartView extends Component {
                                             <Text>+</Text>
                                         </TouchableOpacity>
                                         <Text>{cartItem.quantity}</Text>
-                                        <TouchableOpacity>
+                                        <TouchableOpacity onPress={() => this.decrQuantity(cartItem.product.id)}>
                                             <Text>-</Text>
                                         </TouchableOpacity>
                                     </View>
