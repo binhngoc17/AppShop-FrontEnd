@@ -8,6 +8,7 @@ import {
     Dimensions,
     ListView,
 } from 'react-native';
+import global from '../../../global';
 
 const url = 'http://10.0.2.2/api/images/product/';
 
@@ -16,6 +17,9 @@ function toTitleCase(str) {
 }
 
 export default class CartView extends Component {
+    incrQuantity(productId) {
+        global.incrQuantity(productId);
+    }
     gotoProductDetail() {
         this.props.navigator.push({ name: 'PRODUCT_DETAIL' });
     }
@@ -46,7 +50,7 @@ export default class CartView extends Component {
                                 </View>
                                 <View style={productController}>
                                     <View style={numberOfProduct}>
-                                        <TouchableOpacity>
+                                        <TouchableOpacity onPress={() => this.incrQuantity(cartItem.product.id)}>
                                             <Text>+</Text>
                                         </TouchableOpacity>
                                         <Text>{cartItem.quantity}</Text>
