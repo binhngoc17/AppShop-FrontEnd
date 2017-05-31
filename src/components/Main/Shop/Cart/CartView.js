@@ -35,6 +35,8 @@ export default class CartView extends Component {
             txtName, txtPrice, productImage, numberOfProduct,
             txtShowDetail, showDetailContainer } = styles;
         const { cartArray } = this.props;
+        const arrTotalMoneyonProduct = cartArray.map(e => e.product.price * e.quantity);
+        const TotalMoneyonBill = arrTotalMoneyonProduct.length ? arrTotalMoneyonProduct.reduce((a, b) => a + b) : 0;
         return (
             <View style={wrapper}>
                 <ListView
@@ -43,7 +45,7 @@ export default class CartView extends Component {
                     dataSource={new ListView.DataSource({ rowHasChanged: (r1, r2) => { r1 !== r2 } }).cloneWithRows(cartArray)}
                     renderRow={(cartItem) => (
                         <View style={productStyle}>
-                            <Image source={{uri: `${url}${cartItem.product.images[0]}`}} style={productImage} />
+                            <Image source={{ uri: `${url}${cartItem.product.images[0]}` }} style={productImage} />
                             <View style={mainRight}>
                                 <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
                                     <Text style={txtName}>{toTitleCase(cartItem.product.name)}</Text>
@@ -73,7 +75,7 @@ export default class CartView extends Component {
                     )}
                 />
                 <TouchableOpacity style={checkoutButton}>
-                    <Text style={checkoutTitle}>TOTAL {1000}$ CHECKOUT NOW</Text>
+                    <Text style={checkoutTitle}>TOTAL {TotalMoneyonBill}$ CHECKOUT NOW</Text>
                 </TouchableOpacity>
             </View>
         );
