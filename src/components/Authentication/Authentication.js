@@ -21,6 +21,11 @@ export default class Authentication extends Component {
         // console.log("this is constructor");
         // console.log(this.state.isSignIn);
     }
+    gotoSignIn() {
+        this.setState({
+            isSignIn: true,
+        });
+    }
 
     signIn() {
         this.setState({
@@ -41,14 +46,14 @@ export default class Authentication extends Component {
     goBacktoMain() {
         this.props.navigator.pop();
     }
-    
+
     render() {
         const { container, row1, iconStyle, titleStyle,
             controlStyle, signInStyle, signUpStyle,
             inactiveStyle, activeStyle
         } = styles;
         const { isSignIn } = this.state;
-        const mainJSX = isSignIn ? <SignIn /> : <SignUp />;
+        const mainJSX = isSignIn ? <SignIn /> : <SignUp gotoSignIn={this.gotoSignIn.bind(this)} />;
         return (
             <View style={container}>
                 <View style={row1}>

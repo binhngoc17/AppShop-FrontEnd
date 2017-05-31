@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, TextInput, Text, TouchableOpacity, StyleSheet, Alert, } from 'react-native';
 import register from '../../api/register';
 
 export default class SignUp extends Component {
@@ -12,14 +12,41 @@ export default class SignUp extends Component {
             rePassword: '',
         };
     }
+    onSuccess() {
+        Alert.alert(
+            'Notice',
+            'Sign up successfully',
+            [
+                { text: 'OK', onPress: () => this.props.gotoSignIn() },
+            ],
+            { cancelable: false }
+        )
+    }
+    onFail() {
+        Alert.alert(
+            'Notice',
+            'Email have been used by other',
+            [
+                { text: 'OK', onPress: () => this.removeEmail() },
+            ],
+            { cancelable: false }
+        )
+    }
+    removeEmail() {
+        this.setState({ email: '' });
+    }
     registerUser() {
         const { name, email, password } = this.state;
         register(email, name, password)
-            .then(resText => console.log(resText));
+            .then(resText => {
+                if (resText === 'THANH_CONG') return this.onSuccess();
+                return this.onFail();
+            });
     }
     render() {
-        const { inputStyle, bigButton, buttonText } = styles;
+        const { inputStyle, bigButton, buttonText, alertRePassStyle } = styles;
         const { name, email, password, rePassword } = this.state;
+        const alertRePassJSX = password !== rePassword ? <Text style={alertRePassStyle}>Password is not correct</Text> : null;
         return (
             <View>
                 <TextInput
@@ -49,7 +76,10 @@ export default class SignUp extends Component {
                     underlineColorAndroid='transparent'
                     placeholder='Re-enter your password'
                     secureTextEntry
+                    onChangeText={(text) => this.setState({ rePassword: text })}
+                    value={rePassword}
                 />
+                {alertRePassJSX}
                 <TouchableOpacity style={bigButton} onPress={this.registerUser.bind(this)}>
                     <Text style={buttonText}>SIGN UP NOW</Text>
                 </TouchableOpacity>
@@ -64,6 +94,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         marginBottom: 10,
         borderRadius: 20,
+        paddingLeft: 30
+    },
+    alertRePassStyle: {
+        height: 50,
+        color: '#f44336',
+        marginBottom: 2,
         paddingLeft: 30
     },
     bigButton: {
