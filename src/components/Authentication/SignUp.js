@@ -35,6 +35,20 @@ export default class SignUp extends Component {
     removeEmail() {
         this.setState({ email: '' });
     }
+    checkRePass() {
+        const { password, rePassword } = this.state;
+        console.log(password);
+        console.log(rePassword);
+        if (password !== rePassword)
+            Alert.alert(
+                'Notice',
+                'Password is not correct',
+                [
+                    { text: 'OK', onPress: () => this.setState({ rePassword: '' }) },
+                ],
+                { cancelable: false }
+            );
+    }
     registerUser() {
         const { name, email, password } = this.state;
         register(email, name, password)
@@ -44,9 +58,8 @@ export default class SignUp extends Component {
             });
     }
     render() {
-        const { inputStyle, bigButton, buttonText, alertRePassStyle } = styles;
+        const { inputStyle, bigButton, buttonText } = styles;
         const { name, email, password, rePassword } = this.state;
-        const alertRePassJSX = password !== rePassword ? <Text style={alertRePassStyle}>Password is not correct</Text> : null;
         return (
             <View>
                 <TextInput
@@ -78,8 +91,8 @@ export default class SignUp extends Component {
                     secureTextEntry
                     onChangeText={(text) => this.setState({ rePassword: text })}
                     value={rePassword}
+                    onEndEditing={this.checkRePass.bind(this)}
                 />
-                {alertRePassJSX}
                 <TouchableOpacity style={bigButton} onPress={this.registerUser.bind(this)}>
                     <Text style={buttonText}>SIGN UP NOW</Text>
                 </TouchableOpacity>
