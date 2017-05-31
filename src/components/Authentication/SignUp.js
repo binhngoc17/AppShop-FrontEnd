@@ -1,26 +1,48 @@
 import React, { Component } from 'react';
 import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import register from '../../api/register';
 
 export default class SignUp extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: '',
+            email: '',
+            password: '',
+            rePassword: '',
+        };
+    }
+    registerUser() {
+        const { name, email, password } = this.state;
+        register(email, name, password)
+            .then(resText => console.log(resText));
+    }
     render() {
         const { inputStyle, bigButton, buttonText } = styles;
+        const { name, email, password, rePassword } = this.state;
         return (
             <View>
                 <TextInput
                     style={inputStyle}
                     underlineColorAndroid='transparent'
                     placeholder='Enter your name'
+                    onChangeText={(text) => this.setState({ name: text })}
+                    value={name}
                 />
                 <TextInput
                     style={inputStyle}
                     underlineColorAndroid='transparent'
                     placeholder='Enter your email'
+                    onChangeText={(text) => this.setState({ email: text })}
+                    value={email}
                 />
                 <TextInput
                     style={inputStyle}
                     underlineColorAndroid='transparent'
                     placeholder='Enter your password'
                     secureTextEntry
+                    onChangeText={(text) => this.setState({ password: text })}
+                    value={password}
                 />
                 <TextInput
                     style={inputStyle}
@@ -28,7 +50,7 @@ export default class SignUp extends Component {
                     placeholder='Re-enter your password'
                     secureTextEntry
                 />
-                <TouchableOpacity style={bigButton}>
+                <TouchableOpacity style={bigButton} onPress={this.registerUser.bind(this)}>
                     <Text style={buttonText}>SIGN UP NOW</Text>
                 </TouchableOpacity>
             </View>
@@ -58,3 +80,29 @@ const styles = StyleSheet.create({
         fontWeight: '400'
     }
 });
+
+/*
+componentDidMount() {
+    const { name, email, password, rePassword } = this.state;
+    console.log('componentDidMount');
+    console.log('*************');
+    console.log(name);
+    console.log(email);
+    console.log(password);
+    console.log('*************');
+}
+shouldComponentUpdate(nextState) {
+    if (nextState !== this.state)
+        return true;
+    return false;
+}
+componentDidUpdate() {
+    const { name, email, password, rePassword } = this.state;
+    console.log('componentDidUpdate');
+    console.log('*************');
+    console.log(name);
+    console.log(email);
+    console.log(password);
+    console.log('*************');
+}
+*/
