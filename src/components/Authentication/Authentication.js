@@ -53,7 +53,7 @@ export default class Authentication extends Component {
             inactiveStyle, activeStyle
         } = styles;
         const { isSignIn } = this.state;
-        const mainJSX = isSignIn ? <SignIn /> : <SignUp gotoSignIn={this.gotoSignIn.bind(this)} />;
+        const mainJSX = isSignIn ? <SignIn goBacktoMain={this.goBacktoMain.bind(this)}/> : <SignUp gotoSignIn={this.gotoSignIn.bind(this)} />;
         return (
             <View style={container}>
                 <View style={row1}>
