@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import {
     View,
-    Text,
     StyleSheet,
-    TouchableOpacity,
     Image,
 } from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
@@ -106,9 +104,9 @@ export default class Shop extends Component {
     }
     render() {
         const { types, selectedTab, topProducts, cartArray } = this.state;
-        const { iconStyle } = styles;
+        const { iconStyle, container } = styles;
         return (
-            <View style={styles.container}>
+            <View style={container}>
                 <Header openDrawer={this.openDrawer.bind(this)} />
                 <TabNavigator>
                     <TabNavigator.Item
@@ -162,10 +160,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#F5F5F5',
-    },
-    title: {
-        fontSize: 16,
-        fontWeight: 'bold'
     },
     iconStyle: {
         width: 20, height: 20

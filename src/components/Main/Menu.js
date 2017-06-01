@@ -30,7 +30,7 @@ export default class Menu extends Component {
         this.props.navigator.push({ name: 'Authentication' });
     }
     gotoChangeInfo() {
-        this.props.navigator.push({ name: 'ChangeInfo' });
+        this.props.navigator.push({ name: 'ChangeInfo', user: this.state.user });
     }
     gotoOrderHistory() {
         this.props.navigator.push({ name: 'OrderHistory' });
