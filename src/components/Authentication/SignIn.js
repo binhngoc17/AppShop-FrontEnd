@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { View, TextInput, Text, TouchableOpacity, StyleSheet, Alert, } from 'react-native';
+import { View, TextInput, Text, TouchableOpacity, StyleSheet, Alert, ToastAndroid, } from 'react-native';
 import login from '../../api/login';
 import global from '../global';
+import saveToken from '../../api/saveToken';
+import getToken from '../../api/getToken';
 
 export default class SignIn extends Component {
     constructor(props) {
@@ -10,6 +12,10 @@ export default class SignIn extends Component {
             email: '',
             password: '',
         };
+    }
+    componentDidMount() {
+        getToken()
+            .then(res => console.log("Token:::" + res));
     }
     onFail() {
         Alert.alert(
@@ -28,8 +34,10 @@ export default class SignIn extends Component {
         const { email, password } = this.state;
         login(email, password)
             .then(resJSON => {
-                console.log(resJSON);
+                // console.log(resJSON);
                 global.onSignIn(resJSON.user);
+                saveToken(resJSON.token);
+                ToastAndroid.show('Sign in successfully.', ToastAndroid.SHORT);
                 this.props.goBacktoMain();
             })
             .catch(err => {
