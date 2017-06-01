@@ -9,6 +9,7 @@ import {
 import profileIcon from '../../media/temp/profile.png';
 
 import global from '../global';
+import saveToken from '../../api/saveToken';
 
 export default class Menu extends Component {
     constructor(props) {
@@ -20,6 +21,10 @@ export default class Menu extends Component {
     }
     onSignIn(user) {
         this.setState({ user });
+    }
+    onSignOut(user) {
+        this.setState({user: null});
+        saveToken('');
     }
     gotoAuthentication() {
         this.props.navigator.push({ name: 'Authentication' });
@@ -53,7 +58,7 @@ export default class Menu extends Component {
                     <TouchableOpacity style={btnSignInStyle} onPress={this.gotoChangeInfo.bind(this)}>
                         <Text style={btnTextSignIn}>Change Info</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={btnSignInStyle}>
+                    <TouchableOpacity style={btnSignInStyle} onPress={this.onSignOut.bind(this)}>
                         <Text style={btnTextSignIn}>Sign out</Text>
                     </TouchableOpacity>
                 </View>

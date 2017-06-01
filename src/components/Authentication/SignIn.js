@@ -13,10 +13,6 @@ export default class SignIn extends Component {
             password: '',
         };
     }
-    componentDidMount() {
-        getToken()
-            .then(res => console.log("Token:::" + res));
-    }
     onFail() {
         Alert.alert(
             'Notice',
