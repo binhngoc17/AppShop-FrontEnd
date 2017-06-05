@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
     View,
     StyleSheet,
-    Image,
+    Image, ToastAndroid,
 } from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
 
@@ -50,17 +50,19 @@ export default class Shop extends Component {
                     types: type,
                     topProducts: product,
                 });
-                // console.log(resJSON);
-                // console.log(this.state.types);
-                // console.log(this.state.topProducts);
             });
         getCart()
             .then(cartArray => this.setState({ cartArray }));
     }
-    gotoSearch(){
+    gotoSearch() {
         this.setState({ selectedTab: 'Search' });
     }
     addProductToCart(product) {
+        const isExist = this.state.cartArray.some(e => e.product.id === product.id)
+        if (isExist) {
+            ToastAndroid.show('This product does has been in cart', ToastAndroid.SHORT);
+            return false;
+        }
         this.setState(
             { cartArray: [...this.state.cartArray, { product, quantity: 1 }], },
             () => saveCart(this.state.cartArray)
