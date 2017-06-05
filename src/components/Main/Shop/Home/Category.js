@@ -13,8 +13,8 @@ const url = 'http://10.0.2.2/api/images/type/';
 const { height, width } = Dimensions.get('window');
 
 export default class Category extends Component {
-    gotoListProduct() {
-        this.props.navigator.push({ name: 'LIST_PRODUCT', });
+    gotoListProduct(category) {
+        this.props.navigator.push({ name: 'LIST_PRODUCT', category });
     }
     render() {
         const { types } = this.props;
@@ -22,7 +22,7 @@ export default class Category extends Component {
         const SwiperJSX = (
             <Swiper showsPagination height={imageHeight} width={imageWidth}>
                 {types.map(e => (
-                    <TouchableOpacity onPress={this.gotoListProduct.bind(this)} key={e.id}>
+                    <TouchableOpacity onPress={() => this.gotoListProduct(e)} key={e.id}>
                         <Image source={{uri: `${url}${e.image}`}} style={imageStyle}>
                             <Text style={cateTitle}>{e.name}</Text>
                         </Image>

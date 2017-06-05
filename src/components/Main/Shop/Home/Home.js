@@ -13,7 +13,7 @@ export default class Home extends Component {
             case 'HOME_VIEW':
                 return <HomeView navigator={navigator} types={types} topProducts={topProducts} />;
             case 'LIST_PRODUCT':
-                return <ListProduct navigator={navigator} />;
+                return <ListProduct navigator={navigator} category={route.category} />;
             case 'PRODUCT_DETAIL':
                 return <ProductDetail navigator={navigator} product={route.product} />;
         }
