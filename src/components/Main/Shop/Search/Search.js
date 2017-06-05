@@ -11,7 +11,7 @@ export default class Search extends Component {
             case 'SEARCH_VIEW':
                 return <SearchView navigator={navigator} />;
             case 'PRODUCT_DETAIL':
-                return <ProductDetail navigator={navigator} />;
+                return <ProductDetail navigator={navigator} product={route.product} />;
         }
 
     }

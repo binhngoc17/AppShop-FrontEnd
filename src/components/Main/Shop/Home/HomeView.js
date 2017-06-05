@@ -23,7 +23,7 @@ export default class HomeView extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#DBDBD8',
+        backgroundColor: '#DFDFDF',
     },
     title: {
         fontSize: 16,

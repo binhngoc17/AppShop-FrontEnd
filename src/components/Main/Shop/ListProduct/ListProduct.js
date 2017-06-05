@@ -52,8 +52,8 @@ export default class ListProduct extends Component {
     gotoBack() {
         this.props.navigator.pop();
     }
-    gotoProductDetail() {
-        this.props.navigator.push({ name: 'PRODUCT_DETAIL' });
+    gotoProductDetail(product) {
+        this.props.navigator.push({ name: 'PRODUCT_DETAIL', product });
     }
     render() {
         const {
@@ -87,7 +87,7 @@ export default class ListProduct extends Component {
                                     <View style={lastRowInfo}>
                                         <Text style={txtColor}>{product.color}</Text>
                                         <View />
-                                        <TouchableOpacity>
+                                        <TouchableOpacity onPress={() => this.gotoProductDetail(product)}>
                                             <Text style={txtShowDetail}>SHOW DETAILS</Text>
                                         </TouchableOpacity>
                                     </View>
@@ -106,24 +106,6 @@ export default class ListProduct extends Component {
         );
     }
 }
-
-/**
- * <View style={productContainer}>
-    <Image style={productImage} source={sp1} />
-    <View style={productInfo}>
-        <Text style={txtName}>Lace Sleeve Si</Text>
-        <Text style={txtPrice}>117$</Text>
-        <Text style={txtMaterial}>Material silk</Text>
-        <View style={lastRowInfo}>
-            <Text style={txtColor}>Colo RoyalBlue</Text>
-            <View />
-            <TouchableOpacity>
-                <Text style={txtShowDetail}>SHOW DETAILS</Text>
-            </TouchableOpacity>
-        </View>
-    </View>
-</View>
- */
 
 const styles = StyleSheet.create({
     container: {
