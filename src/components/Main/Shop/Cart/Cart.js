@@ -12,7 +12,7 @@ export default class Cart extends Component {
             case 'CART_VIEW':
                 return <CartView navigator={navigator} cartArray={cartArray} />;
             case 'PRODUCT_DETAIL':
-                return <ProductDetail navigator={navigator} />;
+                return <ProductDetail navigator={navigator} product={route.product}/>;
         }
 
     }

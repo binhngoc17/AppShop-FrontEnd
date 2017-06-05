@@ -26,8 +26,8 @@ export default class CartView extends Component {
     removeProduct(productId) {
         global.removeProduct(productId);
     }
-    gotoProductDetail() {
-        this.props.navigator.push({ name: 'PRODUCT_DETAIL' });
+    gotoProductDetail(product) {
+        this.props.navigator.push({ name: 'PRODUCT_DETAIL', product });
     }
     render() {
         const { main, checkoutButton, checkoutTitle, wrapper,
@@ -66,7 +66,7 @@ export default class CartView extends Component {
                                             <Text>-</Text>
                                         </TouchableOpacity>
                                     </View>
-                                    <TouchableOpacity style={showDetailContainer}>
+                                    <TouchableOpacity style={showDetailContainer} onPress={() => this.gotoProductDetail(cartItem.product)}>
                                         <Text style={txtShowDetail}>SHOW DETAILS</Text>
                                     </TouchableOpacity>
                                 </View>
