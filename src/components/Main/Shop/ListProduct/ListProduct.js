@@ -128,7 +128,8 @@ export default class ListProduct extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#DBDBD8'
+        backgroundColor: '#DBDBD8',
+        paddingBottom: 30
     },
     header: {
         height: 50,
