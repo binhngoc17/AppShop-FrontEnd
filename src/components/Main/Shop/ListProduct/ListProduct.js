@@ -4,6 +4,7 @@ import {
     TouchableOpacity,
     Image,
     ListView,
+    RefreshControl,
 } from 'react-native';
 import getProducts from '../../../../api/getProducts';
 
@@ -19,13 +20,34 @@ export default class ListProduct extends Component {
         super(props);
         const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
         this.state = {
-            products: ds
+            dataSource: ds,
+            refreshing: false,
+            page: 2,
         };
+        this.arr = [];
     }
     componentDidMount() {
         const { id } = this.props.category;
         getProducts(id, 1)
-            .then(resJSON => this.setState({ products: this.state.products.cloneWithRows(resJSON) }));
+            .then(products => {
+                this.arr = [...products];
+                this.setState({ dataSource: this.state.dataSource.cloneWithRows(this.arr) });
+            });
+    }
+    onRefresh() {
+        this.setState({ refreshing: true });
+        const { id } = this.props.category;
+        const { page } = this.state;
+        getProducts(id, page)
+            .then(products => {
+                this.arr = [...products, ...this.arr];
+                this.setState({ dataSource: this.state.dataSource.cloneWithRows(this.arr) });
+            })
+            .then(() => this.setState({ refreshing: false, page: page + 1 }))
+            .catch(err => {
+                console.log(err);
+                this.setState({ refreshing: false });
+            });
     }
     gotoBack() {
         this.props.navigator.pop();
@@ -40,7 +62,7 @@ export default class ListProduct extends Component {
             txtName, txtPrice, txtMaterial, txtColor, txtShowDetail
          } = styles;
         const { category } = this.props;
-        const { products } = this.state;
+        const { dataSource } = this.state;
         return (
             <View style={styles.container}>
                 <View style={wrapper}>
@@ -54,7 +76,7 @@ export default class ListProduct extends Component {
                     <ListView
                         removeClippedSubviews={false}
                         enableEmptySections
-                        dataSource={products}
+                        dataSource={dataSource}
                         renderRow={(product) => (
                             <View style={productContainer}>
                                 <Image style={productImage} source={{ uri: `${url}${product.images[0]}` }} />
@@ -72,6 +94,12 @@ export default class ListProduct extends Component {
                                 </View>
                             </View>
                         )}
+                        refreshControl={
+                            <RefreshControl
+                                refreshing={this.state.refreshing}
+                                onRefresh={this.onRefresh.bind(this)}
+                            />
+                        }
                     />
                 </View>
             </View>
