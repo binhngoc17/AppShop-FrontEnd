@@ -28,6 +28,10 @@ export default class SignIn extends Component {
     }
     onSignIn() {
         const { email, password } = this.state;
+        if(email === '' || password === '') {
+            ToastAndroid.show('Please do not leave your username and password blank', ToastAndroid.SHORT);
+            return false;
+        }
         login(email, password)
             .then(resJSON => {
                 // console.log(resJSON);

@@ -6,7 +6,7 @@ import {
     TouchableOpacity,
     Image,
     Dimensions,
-    ListView, ToastAndroid, Alert,
+    ListView, ToastAndroid,
 } from 'react-native';
 import global from '../../../global';
 import getToken from '../../../../api/getToken';
@@ -23,14 +23,7 @@ export default class CartView extends Component {
         try {
             const token = await getToken();
             if (token === '' || token === 'TOKEN_KHONG_HOP_LE') {
-                Alert.alert(
-                    'Notice',
-                    'Please sign in to continue.',
-                    [
-                        { text: 'OK', onPress: () => console.log('OK Pressed') },
-                    ],
-                    { cancelable: false }
-                )
+                ToastAndroid.show('Please sign in to continue.', ToastAndroid.SHORT);
                 return false;
             }
             const { cartArray } = this.props;

@@ -3,7 +3,6 @@ import {
     ScrollView,
     StyleSheet,
 } from 'react-native';
-import Banner from './Banner';
 import Category from './Category';
 import TopProduct from './TopProduct';
 
@@ -12,7 +11,6 @@ export default class HomeView extends Component {
         const { types, topProducts } = this.props;
         return (
             <ScrollView style={styles.container}>
-                <Banner />
                 <Category navigator={this.props.navigator} types={types} />
                 <TopProduct navigator={this.props.navigator} topProducts={topProducts}/>
             </ScrollView>

@@ -21,11 +21,6 @@ export default class Contact extends Component {
         } = styles;
         return (
             <View style={wrapper}>
-                <View style={mapContainer}>
-                    <Image
-                        style={{ flex: 1, alignSelf: 'stretch', width: undefined }} source={map}
-                    />
-                </View>
                 <View style={infoContainer}>
                     <View style={rowInfoContainer}>
                         <Image source={locationIcon} style={imageStyle} />
@@ -52,30 +47,11 @@ export default class Contact extends Component {
 const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
     wrapper: { flex: 1, backgroundColor: '#DFDFDF' },
-    mapStyle: {
-        width: width - 40,
-        height: 230,
-        alignSelf: 'center',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    mapContainer: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        flex: 1,
-        backgroundColor: '#FFFFFF',
-        margin: 10,
-        borderRadius: 2,
-        shadowColor: '#3B5458',
-        shadowOffset: { width: 0, height: 3 },
-        shadowOpacity: 0.2
-    },
     infoContainer: {
         padding: 10,
         flex: 1,
         backgroundColor: '#FFF',
         margin: 10,
-        marginTop: 0,
         borderRadius: 2,
         shadowColor: '#3B5458',
         shadowOffset: { width: 0, height: 3 },
