@@ -4,7 +4,7 @@ import {
     TouchableOpacity,
     Image,
     ListView,
-    RefreshControl,
+    RefreshControl, ActivityIndicator,
 } from 'react-native';
 import getProducts from '../../../../api/getProducts';
 
@@ -63,6 +63,44 @@ export default class ListProduct extends Component {
          } = styles;
         const { category } = this.props;
         const { dataSource } = this.state;
+        const IndicatorJSX = (
+            <ActivityIndicator
+                animating
+                color="#2ABB9C"
+                style={[styles.centering, { height: 80 }]}
+                size="large"
+            />
+        );
+        const MainViewJSX = (
+            <ListView
+                removeClippedSubviews={false}
+                enableEmptySections
+                dataSource={dataSource}
+                renderRow={(product) => (
+                    <View style={productContainer}>
+                        <Image style={productImage} source={{ uri: `${url}${product.images[0]}` }} />
+                        <View style={productInfo}>
+                            <Text style={txtName}>{toTitleCase(product.name)}</Text>
+                            <Text style={txtPrice}>{product.price}$</Text>
+                            <Text style={txtMaterial}>{product.material}</Text>
+                            <View style={lastRowInfo}>
+                                <Text style={txtColor}>{product.color}</Text>
+                                <View />
+                                <TouchableOpacity onPress={() => this.gotoProductDetail(product)}>
+                                    <Text style={txtShowDetail}>SHOW DETAILS</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </View>
+                )}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={this.state.refreshing}
+                        onRefresh={this.onRefresh.bind(this)}
+                    />
+                }
+            />
+        );
         return (
             <View style={styles.container}>
                 <View style={wrapper}>
@@ -73,34 +111,7 @@ export default class ListProduct extends Component {
                         <Text style={titleStyle}>{category.name}</Text>
                         <View style={{ width: 30 }} />
                     </View>
-                    <ListView
-                        removeClippedSubviews={false}
-                        enableEmptySections
-                        dataSource={dataSource}
-                        renderRow={(product) => (
-                            <View style={productContainer}>
-                                <Image style={productImage} source={{ uri: `${url}${product.images[0]}` }} />
-                                <View style={productInfo}>
-                                    <Text style={txtName}>{toTitleCase(product.name)}</Text>
-                                    <Text style={txtPrice}>{product.price}$</Text>
-                                    <Text style={txtMaterial}>{product.material}</Text>
-                                    <View style={lastRowInfo}>
-                                        <Text style={txtColor}>{product.color}</Text>
-                                        <View />
-                                        <TouchableOpacity onPress={() => this.gotoProductDetail(product)}>
-                                            <Text style={txtShowDetail}>SHOW DETAILS</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                </View>
-                            </View>
-                        )}
-                        refreshControl={
-                            <RefreshControl
-                                refreshing={this.state.refreshing}
-                                onRefresh={this.onRefresh.bind(this)}
-                            />
-                        }
-                    />
+                    {!this.arr.length ? IndicatorJSX : MainViewJSX}
                 </View>
             </View>
         );
@@ -180,5 +191,10 @@ const styles = StyleSheet.create({
         fontFamily: 'Avenir',
         color: '#B10D65',
         fontSize: 9
-    }
+    },
+    centering: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 8,
+    },
 });

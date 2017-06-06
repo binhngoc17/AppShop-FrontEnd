@@ -4,7 +4,7 @@ import {
     Text,
     TouchableOpacity,
     StyleSheet,
-    Image, Dimensions, ScrollView,
+    Image, Dimensions, ScrollView, ActivityIndicator,
 } from 'react-native';
 import getOrderHistory from '../../api/getOrderHistory';
 import getToken from '../../api/getToken';
@@ -30,6 +30,38 @@ export default class OrderHistory extends Component {
     render() {
         const { wrapper, header, headerTitle, backIconStyle, body, orderRow } = styles;
         const { arrOrder } = this.state;
+        const IndicatorJSX = (
+            <ActivityIndicator
+                animating
+                color="#2ABB9C"
+                style={[styles.centering, { height: 80 }]}
+                size="large"
+            />
+        );
+        const OrdersJSX = (
+            <ScrollView>
+                {arrOrder.map(e => (
+                    <View style={orderRow} key={e.id}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Order id:</Text>
+                            <Text style={{ color: '#2ABB9C' }}>ORD{e.id}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>OrderTime:</Text>
+                            <Text style={{ color: '#C21C70' }}>{e.date_order}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Status:</Text>
+                            <Text style={{ color: '#2ABB9C' }}>{e.status ? "pending" : "complete"}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Total:</Text>
+                            <Text style={{ color: '#C21C70', fontWeight: 'bold' }}>{e.total}$</Text>
+                        </View>
+                    </View>
+                ))}
+            </ScrollView>
+        );
         return (
             <View style={wrapper}>
                 <View style={header}>
@@ -40,33 +72,14 @@ export default class OrderHistory extends Component {
                     </TouchableOpacity>
                 </View>
                 <View style={body}>
-                    <ScrollView>
-                        {arrOrder.map(e => (
-                            <View style={orderRow} key={e.id}>
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Order id:</Text>
-                                    <Text style={{ color: '#2ABB9C' }}>ORD{e.id}</Text>
-                                </View>
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>OrderTime:</Text>
-                                    <Text style={{ color: '#C21C70' }}>{e.date_order}</Text>
-                                </View>
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Status:</Text>
-                                    <Text style={{ color: '#2ABB9C' }}>{e.status ? "pending" : "complete" }</Text>
-                                </View>
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Total:</Text>
-                                    <Text style={{ color: '#C21C70', fontWeight: 'bold' }}>{e.total}$</Text>
-                                </View>
-                            </View>
-                        ))}
-                    </ScrollView>
+                    {!arrOrder.length ? IndicatorJSX : OrdersJSX}
                 </View>
             </View>
         );
     }
 }
+
+//{arrOrder.length ? OrdersJSX : IndicatorJSX}
 
 const { width } = Dimensions.get('window');
 
@@ -86,5 +99,10 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 2,
         justifyContent: 'space-around'
-    }
+    },
+    centering: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 8,
+    },
 });

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
     View,
     StyleSheet,
-    Image, ToastAndroid,
+    Image, ToastAndroid, ActivityIndicator,
 } from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
 
@@ -111,52 +111,63 @@ export default class Shop extends Component {
     render() {
         const { types, selectedTab, topProducts, cartArray } = this.state;
         const { iconStyle, container } = styles;
+        const IndicatorJSX = (
+            <ActivityIndicator
+                animating
+                color="#2ABB9C"
+                style={[styles.centering, { height: 80 }]}
+                size="large"
+            />
+        );
+        const MainViewJSX = (
+            <TabNavigator>
+                <TabNavigator.Item
+                    selected={selectedTab === 'Home'}
+                    title="Home"
+                    onPress={() => this.setState({ selectedTab: 'Home' })}
+                    renderIcon={() => <Image source={homeIcon} style={iconStyle} />}
+                    renderSelectedIcon={() => <Image source={homeIconS} style={iconStyle} />}
+                    selectedTitleStyle={{ color: '#34B089' }}
+                >
+                    <Home types={types} topProducts={topProducts} />
+                </TabNavigator.Item>
+                <TabNavigator.Item
+                    selected={selectedTab === 'Cart'}
+                    title="Cart"
+                    onPress={() => this.setState({ selectedTab: 'Cart' })}
+                    renderIcon={() => <Image source={cartIcon} style={iconStyle} />}
+                    renderSelectedIcon={() => <Image source={cartIconS} style={iconStyle} />}
+                    selectedTitleStyle={{ color: '#34B089' }}
+                    badgeText={cartArray.length}
+                >
+                    <Cart cartArray={cartArray} />
+                </TabNavigator.Item>
+                <TabNavigator.Item
+                    selected={selectedTab === 'Search'}
+                    title="Search"
+                    onPress={() => this.setState({ selectedTab: 'Search' })}
+                    renderIcon={() => <Image source={searchIcon} style={iconStyle} />}
+                    renderSelectedIcon={() => <Image source={searchIconS} style={iconStyle} />}
+                    selectedTitleStyle={{ color: '#34B089' }}
+                >
+                    <Search />
+                </TabNavigator.Item>
+                <TabNavigator.Item
+                    selected={selectedTab === 'Contact'}
+                    title="Contact"
+                    onPress={() => this.setState({ selectedTab: 'Contact' })}
+                    renderIcon={() => <Image source={contactIcon} style={iconStyle} />}
+                    renderSelectedIcon={() => <Image source={contactIconS} style={iconStyle} />}
+                    selectedTitleStyle={{ color: '#34B089' }}
+                >
+                    <Contact />
+                </TabNavigator.Item>
+            </TabNavigator>
+        );
         return (
             <View style={container}>
                 <Header openDrawer={this.openDrawer.bind(this)} />
-                <TabNavigator>
-                    <TabNavigator.Item
-                        selected={selectedTab === 'Home'}
-                        title="Home"
-                        onPress={() => this.setState({ selectedTab: 'Home' })}
-                        renderIcon={() => <Image source={homeIcon} style={iconStyle} />}
-                        renderSelectedIcon={() => <Image source={homeIconS} style={iconStyle} />}
-                        selectedTitleStyle={{ color: '#34B089' }}
-                    >
-                        <Home types={types} topProducts={topProducts} />
-                    </TabNavigator.Item>
-                    <TabNavigator.Item
-                        selected={selectedTab === 'Cart'}
-                        title="Cart"
-                        onPress={() => this.setState({ selectedTab: 'Cart' })}
-                        renderIcon={() => <Image source={cartIcon} style={iconStyle} />}
-                        renderSelectedIcon={() => <Image source={cartIconS} style={iconStyle} />}
-                        selectedTitleStyle={{ color: '#34B089' }}
-                        badgeText={cartArray.length}
-                    >
-                        <Cart cartArray={cartArray} />
-                    </TabNavigator.Item>
-                    <TabNavigator.Item
-                        selected={selectedTab === 'Search'}
-                        title="Search"
-                        onPress={() => this.setState({ selectedTab: 'Search' })}
-                        renderIcon={() => <Image source={searchIcon} style={iconStyle} />}
-                        renderSelectedIcon={() => <Image source={searchIconS} style={iconStyle} />}
-                        selectedTitleStyle={{ color: '#34B089' }}
-                    >
-                        <Search />
-                    </TabNavigator.Item>
-                    <TabNavigator.Item
-                        selected={selectedTab === 'Contact'}
-                        title="Contact"
-                        onPress={() => this.setState({ selectedTab: 'Contact' })}
-                        renderIcon={() => <Image source={contactIcon} style={iconStyle} />}
-                        renderSelectedIcon={() => <Image source={contactIconS} style={iconStyle} />}
-                        selectedTitleStyle={{ color: '#34B089' }}
-                    >
-                        <Contact />
-                    </TabNavigator.Item>
-                </TabNavigator>
+                {!types.length || !topProducts.length ? IndicatorJSX : MainViewJSX}
             </View>
         );
     };
@@ -169,5 +180,10 @@ const styles = StyleSheet.create({
     },
     iconStyle: {
         width: 20, height: 20
-    }
+    },
+    centering: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 8,
+    },
 });
