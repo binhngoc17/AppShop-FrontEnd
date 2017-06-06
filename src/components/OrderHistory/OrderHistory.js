@@ -6,6 +6,8 @@ import {
     StyleSheet,
     Image, Dimensions, ScrollView,
 } from 'react-native';
+import getOrderHistory from '../../api/getOrderHistory';
+import getToken from '../../api/getToken';
 
 import backSpecial from '../../media/appIcon/backs.png';
 
@@ -14,11 +16,20 @@ export default class OrderHistory extends Component {
         super(props);
         this.state = { arrOrder: [] };
     }
+    componentDidMount() {
+        getToken()
+            .then(token => getOrderHistory(token))
+            .then(resJSON => {
+                this.setState({ arrOrder: [...resJSON] });
+            })
+            .catch(err => console.log(err));
+    }
     goBacktoMain() {
         this.props.navigator.pop();
     }
     render() {
         const { wrapper, header, headerTitle, backIconStyle, body, orderRow } = styles;
+        const { arrOrder } = this.state;
         return (
             <View style={wrapper}>
                 <View style={header}>
@@ -30,24 +41,26 @@ export default class OrderHistory extends Component {
                 </View>
                 <View style={body}>
                     <ScrollView>
-                        <View style={orderRow}>
-                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Order id:</Text>
-                                <Text style={{ color: '#2ABB9C' }}>ORD001</Text>
+                        {arrOrder.map(e => (
+                            <View style={orderRow} key={e.id}>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                    <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Order id:</Text>
+                                    <Text style={{ color: '#2ABB9C' }}>ORD{e.id}</Text>
+                                </View>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                    <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>OrderTime:</Text>
+                                    <Text style={{ color: '#C21C70' }}>{e.date_order}</Text>
+                                </View>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                    <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Status:</Text>
+                                    <Text style={{ color: '#2ABB9C' }}>{e.status ? "pending" : "complete" }</Text>
+                                </View>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                    <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Total:</Text>
+                                    <Text style={{ color: '#C21C70', fontWeight: 'bold' }}>{e.total}$</Text>
+                                </View>
                             </View>
-                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>OrderTime:</Text>
-                                <Text style={{ color: '#C21C70' }}>2017-04-19 08:30:08</Text>
-                            </View>
-                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Status:</Text>
-                                <Text style={{ color: '#2ABB9C' }}>Pending</Text>
-                            </View>
-                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Total:</Text>
-                                <Text style={{ color: '#C21C70', fontWeight: 'bold' }}>100$</Text>
-                            </View>
-                        </View>
+                        ))}
                     </ScrollView>
                 </View>
             </View>

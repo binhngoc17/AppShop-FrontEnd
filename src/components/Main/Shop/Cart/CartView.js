@@ -6,9 +6,11 @@ import {
     TouchableOpacity,
     Image,
     Dimensions,
-    ListView,
+    ListView, ToastAndroid, Alert,
 } from 'react-native';
 import global from '../../../global';
+import getToken from '../../../../api/getToken';
+import sendOrder from '../../../../api/sendOrder';
 
 const url = 'http://10.0.2.2/api/images/product/';
 
@@ -17,6 +19,36 @@ function toTitleCase(str) {
 }
 
 export default class CartView extends Component {
+    async onSendOrder() {
+        try {
+            const token = await getToken();
+            if (token === '' || token === 'TOKEN_KHONG_HOP_LE') {
+                Alert.alert(
+                    'Notice',
+                    'Please sign in to continue.',
+                    [
+                        { text: 'OK', onPress: () => console.log('OK Pressed') },
+                    ],
+                    { cancelable: false }
+                )
+                return false;
+            }
+            const { cartArray } = this.props;
+            const arrayDetail = cartArray.map(e => ({
+                id: e.product.id,
+                quantity: e.quantity
+            }));
+            const res = await sendOrder(token, arrayDetail);
+            if (res === "THEM_THANH_CONG") {
+                ToastAndroid.show('Transaction successfully', ToastAndroid.SHORT);
+            }
+            else {
+                ToastAndroid.show('Oh, something is wrong, please try again later, We are so sorry!', ToastAndroid.SHORT);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
     incrQuantity(productId) {
         global.incrQuantity(productId);
     }
@@ -74,7 +106,7 @@ export default class CartView extends Component {
                         </View>
                     )}
                 />
-                <TouchableOpacity style={checkoutButton}>
+                <TouchableOpacity style={checkoutButton} onPress={this.onSendOrder.bind(this)}>
                     <Text style={checkoutTitle}>TOTAL {TotalMoneyonBill}$ CHECKOUT NOW</Text>
                 </TouchableOpacity>
             </View>
