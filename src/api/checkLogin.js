@@ -1,7 +1,8 @@
-const baseURL = 'http://10.0.2.2/api/check_login.php';
+import baseURL from './connect';
+const URL = `${baseURL}/api/check_login`;
 
 const checkLogin = (token) => (
-    fetch(baseURL, {
+    fetch(URL, {
         method: 'POST',
         headers: {
             'content-Type': 'application/json',

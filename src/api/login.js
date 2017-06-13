@@ -1,7 +1,8 @@
-const baseURL = 'http://10.0.2.2/api/login.php';
+import baseURL from './connect';
+const URL = `${baseURL}/api/login`;
 
 const login = (email, password) => (
-    fetch(baseURL, {
+    fetch(URL, {
         method: 'POST',
         headers: {
             'content-Type': 'application/json',

@@ -1,7 +1,8 @@
-const baseURL = 'http://10.0.2.2/api/order_history.php';
+import baseURL from './connect';
+const URL = `${baseURL}/api/order_history`;
 
 const getOrderHistory = (token) => (
-    fetch(baseURL, {
+    fetch(URL, {
         method: 'POST',
         headers: {
             'content-Type': 'application/json',

@@ -1,7 +1,8 @@
-const baseURL = 'http://10.0.2.2/api/register.php';
+import baseURL from './connect';
+const URL = `${baseURL}/api/register`;
 
 const register = (email, name, password) => (
-    fetch(baseURL, {
+    fetch(URL, {
         method: 'POST',
         headers: {
             'content-Type': 'application/json',

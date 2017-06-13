@@ -1,6 +1,8 @@
+import baseURL from './connect';
+
 const searchProducts = (key) => {
-    const baseUrl = `http://10.0.2.2/api/search.php?key=${key}`;
-    return fetch(baseUrl)
+    const URL = `${baseURL}/api/search/${key}`;
+    return fetch(URL)
     .then(res => res.json());
 };
 

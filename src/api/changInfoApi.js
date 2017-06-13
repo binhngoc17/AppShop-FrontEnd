@@ -1,7 +1,8 @@
-const baseURL = 'http://10.0.2.2/api/change_info.php';
+import baseURL from './connect';
+const URL = `${baseURL}/api/change_info`;
 
 const changeInfoApi = (token, name, address, phone) => (
-    fetch(baseURL, {
+    fetch(URL, {
         method: 'POST',
         headers: {
             'content-Type': 'application/json',

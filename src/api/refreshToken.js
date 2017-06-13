@@ -1,9 +1,11 @@
 import getToken from './getToken';
 import saveToken from './saveToken';
-const baseURL = 'http://10.0.2.2/api/refresh_token.php';
+import baseURL from './connect';
+
+const URL = `${baseURL}/api/refresh_token`;
 
 const getNewToken = (token) => (
-    fetch(baseURL, {
+    fetch(URL, {
         method: 'POST',
         headers: {
             'content-Type': 'application/json',
