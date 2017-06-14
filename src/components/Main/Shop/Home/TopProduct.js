@@ -9,7 +9,8 @@ import {
     ListView,
 } from 'react-native';
 
-const url = 'http://10.0.2.2/api/images/product/';
+import baseURL from '../../../../api/connect';
+const url = `${baseURL}/api/images/product/`;
 
 export default class TopProduct extends Component {
     gotoProductDetail(product) {
@@ -24,7 +25,7 @@ export default class TopProduct extends Component {
         return (
             <View style={container}>
                 <View style={titleContainer}>
-                    <Text style={title}>Top Product</Text>
+                    <Text style={title}>SẢN PHẨM NỔI BẬT</Text>
                 </View>
                 <ListView
                     contentContainerStyle={body}
@@ -33,7 +34,7 @@ export default class TopProduct extends Component {
                         <TouchableOpacity style={productContainer} onPress={() => this.gotoProductDetail(product)}>
                             <Image source={{uri: `${url}${product.images[0]}`}} style={productImage} />
                             <Text style={produceName}>{product.name.toUpperCase()}</Text>
-                            <Text style={producePrice}>{product.price}$</Text>
+                            <Text style={producePrice}>{product.price}đ</Text>
                         </TouchableOpacity>
                     )}
                     enableEmptySections
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
         paddingLeft: 10
     },
     title: {
-        color: '#D3D3CF',
+        color: '#34B089',
         fontSize: 20
     },
     body: {
@@ -88,7 +89,7 @@ const styles = StyleSheet.create({
         marginVertical: 5,
         paddingLeft: 10,
         fontFamily: 'Avenir',
-        color: '#D3D3CF',
+        color: '#34B089',
         fontWeight: '500'
     },
     producePrice: {

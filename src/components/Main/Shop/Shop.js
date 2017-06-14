@@ -60,7 +60,7 @@ export default class Shop extends Component {
     addProductToCart(product) {
         const isExist = this.state.cartArray.some(e => e.product.id === product.id)
         if (isExist) {
-            ToastAndroid.show('This product does has been in cart', ToastAndroid.SHORT);
+            ToastAndroid.show('Sản phẩm này đã có trong giỏ hàng', ToastAndroid.SHORT);
             return false;
         }
         this.setState(
@@ -123,7 +123,7 @@ export default class Shop extends Component {
             <TabNavigator>
                 <TabNavigator.Item
                     selected={selectedTab === 'Home'}
-                    title="Home"
+                    title="Trang Chủ"
                     onPress={() => this.setState({ selectedTab: 'Home' })}
                     renderIcon={() => <Image source={homeIcon} style={iconStyle} />}
                     renderSelectedIcon={() => <Image source={homeIconS} style={iconStyle} />}
@@ -133,7 +133,7 @@ export default class Shop extends Component {
                 </TabNavigator.Item>
                 <TabNavigator.Item
                     selected={selectedTab === 'Cart'}
-                    title="Cart"
+                    title="Giỏ Hàng"
                     onPress={() => this.setState({ selectedTab: 'Cart' })}
                     renderIcon={() => <Image source={cartIcon} style={iconStyle} />}
                     renderSelectedIcon={() => <Image source={cartIconS} style={iconStyle} />}
@@ -144,7 +144,7 @@ export default class Shop extends Component {
                 </TabNavigator.Item>
                 <TabNavigator.Item
                     selected={selectedTab === 'Search'}
-                    title="Search"
+                    title="Tìm Kiếm"
                     onPress={() => this.setState({ selectedTab: 'Search' })}
                     renderIcon={() => <Image source={searchIcon} style={iconStyle} />}
                     renderSelectedIcon={() => <Image source={searchIconS} style={iconStyle} />}
@@ -154,7 +154,7 @@ export default class Shop extends Component {
                 </TabNavigator.Item>
                 <TabNavigator.Item
                     selected={selectedTab === 'Contact'}
-                    title="Contact"
+                    title="Liên Hệ"
                     onPress={() => this.setState({ selectedTab: 'Contact' })}
                     renderIcon={() => <Image source={contactIcon} style={iconStyle} />}
                     renderSelectedIcon={() => <Image source={contactIconS} style={iconStyle} />}

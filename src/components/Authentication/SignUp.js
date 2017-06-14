@@ -14,8 +14,8 @@ export default class SignUp extends Component {
     }
     onSuccess() {
         Alert.alert(
-            'Notice',
-            'Sign up successfully',
+            'Thông báo',
+            'Đăng ký thành công',
             [
                 { text: 'OK', onPress: () => this.props.gotoSignIn() },
             ],
@@ -24,8 +24,8 @@ export default class SignUp extends Component {
     }
     onFail() {
         Alert.alert(
-            'Notice',
-            'Email have been used by other',
+            'Thông báo',
+            'Email này đã được đăng ký trước đây, hãy nhập lại email khác',
             [
                 { text: 'OK', onPress: () => this.removeEmail() },
             ],
@@ -41,8 +41,8 @@ export default class SignUp extends Component {
         console.log(rePassword);
         if (password !== rePassword)
             Alert.alert(
-                'Notice',
-                'Password is not correct',
+                'Thông báo',
+                'Mật khẩu không chính xác',
                 [
                     { text: 'OK', onPress: () => this.setState({ rePassword: '' }) },
                 ],
@@ -65,21 +65,21 @@ export default class SignUp extends Component {
                 <TextInput
                     style={inputStyle}
                     underlineColorAndroid='transparent'
-                    placeholder='Enter your name'
+                    placeholder='Nhập tên của bạn'
                     onChangeText={(text) => this.setState({ name: text })}
                     value={name}
                 />
                 <TextInput
                     style={inputStyle}
                     underlineColorAndroid='transparent'
-                    placeholder='Enter your email'
+                    placeholder='Nhập email của bạn'
                     onChangeText={(text) => this.setState({ email: text })}
                     value={email}
                 />
                 <TextInput
                     style={inputStyle}
                     underlineColorAndroid='transparent'
-                    placeholder='Enter your password'
+                    placeholder='Nhập mật khẩu của bạn'
                     secureTextEntry
                     onChangeText={(text) => this.setState({ password: text })}
                     value={password}
@@ -87,14 +87,14 @@ export default class SignUp extends Component {
                 <TextInput
                     style={inputStyle}
                     underlineColorAndroid='transparent'
-                    placeholder='Re-enter your password'
+                    placeholder='Nhập lại mật khẩu'
                     secureTextEntry
                     onChangeText={(text) => this.setState({ rePassword: text })}
                     value={rePassword}
                     onEndEditing={this.checkRePass.bind(this)}
                 />
                 <TouchableOpacity style={bigButton} onPress={this.registerUser.bind(this)}>
-                    <Text style={buttonText}>SIGN UP NOW</Text>
+                    <Text style={buttonText}>Đăng ký ngay</Text>
                 </TouchableOpacity>
             </View>
         );

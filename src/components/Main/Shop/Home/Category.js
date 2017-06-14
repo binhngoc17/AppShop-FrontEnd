@@ -9,7 +9,9 @@ import {
 } from 'react-native';
 import Swiper from 'react-native-swiper';
 
-const url = 'http://10.0.2.2/api/images/type/';
+import baseURL from '../../../../api/connect';
+const url = `${baseURL}/api/images/type/`;
+
 const { height, width } = Dimensions.get('window');
 
 export default class Category extends Component {
@@ -23,7 +25,7 @@ export default class Category extends Component {
             <Swiper showsPagination height={imageHeight} width={imageWidth}>
                 {types.map(e => (
                     <TouchableOpacity onPress={() => this.gotoListProduct(e)} key={e.id}>
-                        <Image source={{uri: `${url}${e.image}`}} style={imageStyle}>
+                        <Image source={{ uri: `${url}${e.image}` }} style={imageStyle}>
                             <Text style={cateTitle}>{e.name}</Text>
                         </Image>
                     </TouchableOpacity>
@@ -33,7 +35,7 @@ export default class Category extends Component {
         return (
             <View style={wrapper}>
                 <View style={{ height: 50, justifyContent: 'center' }}>
-                    <Text style={textStyle}>LIST OF CATEGORY</Text>
+                    <Text style={textStyle}>CÁC LOẠI GẠO</Text>
                 </View>
                 <View style={{ flex: 4, justifyContent: 'flex-end' }}>
                     {types.length ? SwiperJSX : null}
@@ -59,7 +61,7 @@ const styles = StyleSheet.create({
     },
     textStyle: {
         fontSize: 20,
-        color: '#AFAEAF'
+        color: '#34B089'
     },
     imageStyle: {
         height: imageHeight,
@@ -70,6 +72,6 @@ const styles = StyleSheet.create({
     cateTitle: {
         fontSize: 20,
         fontFamily: 'Avenir',
-        color: '#9A9A9A'
+        color: '#212121'
     }
 });

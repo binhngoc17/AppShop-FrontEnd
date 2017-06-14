@@ -9,7 +9,8 @@ import {
 import getProducts from '../../../../api/getProducts';
 
 import backList from '../../../../media/appIcon/backList.png';
-const url = 'http://10.0.2.2/api/images/product/';
+import baseURL from '../../../../api/connect';
+const url = `${baseURL}/api/images/product/`;
 
 function toTitleCase(str) {
     return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
@@ -81,13 +82,13 @@ export default class ListProduct extends Component {
                         <Image style={productImage} source={{ uri: `${url}${product.images[0]}` }} />
                         <View style={productInfo}>
                             <Text style={txtName}>{toTitleCase(product.name)}</Text>
-                            <Text style={txtPrice}>{product.price}$</Text>
-                            <Text style={txtMaterial}>{product.material}</Text>
+                            <Text style={txtPrice}>{product.price}đ</Text>
+                            <Text style={txtMaterial}>null</Text>
                             <View style={lastRowInfo}>
-                                <Text style={txtColor}>{product.color}</Text>
+                                <Text style={txtColor}>null</Text>
                                 <View />
                                 <TouchableOpacity onPress={() => this.gotoProductDetail(product)}>
-                                    <Text style={txtShowDetail}>SHOW DETAILS</Text>
+                                    <Text style={txtShowDetail}>Xem chi tiết</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -173,7 +174,7 @@ const styles = StyleSheet.create({
     },
     txtName: {
         fontFamily: 'Avenir',
-        color: '#BCBCBC',
+        color: '#34B089',
         fontSize: 20,
         fontWeight: '400'
     },
@@ -190,7 +191,7 @@ const styles = StyleSheet.create({
     txtShowDetail: {
         fontFamily: 'Avenir',
         color: '#B10D65',
-        fontSize: 9
+        fontSize: 13
     },
     centering: {
         alignItems: 'center',

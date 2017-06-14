@@ -5,7 +5,8 @@ import {
 } from 'react-native';
 import global from '../../../global';
 
-const url = 'http://10.0.2.2/api/images/product/';
+import baseURL from '../../../../api/connect';
+const url = `${baseURL}/api/images/product/`;
 
 import back from '../../../../media/appIcon/back.png';
 import cart from '../../../../media/appIcon/cartfull.png';
@@ -27,7 +28,7 @@ export default class ProductDetail extends Component {
             textSmoke, textHighlight, textMain, titleContainer,
             descContainer, productImageStyle, descStyle, txtMaterial, txtColor
         } = styles;
-        const { id, name, nameType, price, material, description, color, images, } = this.props.product;
+        const { id, name, nameType, price, description, images, } = this.props.product;
         const SwiperImagesJSX = (
             <ScrollView horizontal >
                 {images.map(e => (
@@ -54,7 +55,7 @@ export default class ProductDetail extends Component {
                             <Text style={textMain}>
                                 <Text style={textBlack}>{name.toUpperCase()}</Text>
                                 <Text style={textHighlight}> / </Text>
-                                <Text style={textSmoke}>{price}$</Text>
+                                <Text style={textSmoke}>{price}đ</Text>
                             </Text>
                         </View>
                         <View style={descContainer}>
@@ -64,8 +65,8 @@ export default class ProductDetail extends Component {
                                 </Text>
                             </ScrollView>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 15 }}>
-                                <Text style={txtMaterial}>{material}</Text>
-                                <Text style={txtColor}>{color}</Text>
+                                <Text style={txtMaterial}>null</Text>
+                                <Text style={txtColor}>null</Text>
                             </View>
                         </View>
                     </View>
@@ -134,7 +135,7 @@ const styles = StyleSheet.create({
     textSmoke: {
         fontFamily: 'Avenir',
         fontSize: 20,
-        color: '#9A9A9A'
+        color: '#B10D65'
     },
     textHighlight: {
         fontFamily: 'Avenir',

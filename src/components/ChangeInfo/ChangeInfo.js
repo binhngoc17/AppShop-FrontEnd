@@ -29,8 +29,8 @@ export default class ChangeInfo extends Component {
     }
     onSuccess() {
         Alert.alert(
-            'Notice',
-            'Change information successfully',
+            'Thông báo',
+            'Thay đổi thành công.',
             [
                 { text: 'OK', onPress: () => this.goBacktoMain() },
             ],
@@ -57,7 +57,7 @@ export default class ChangeInfo extends Component {
             <View style={wrapper}>
                 <View style={header}>
                     <View />
-                    <Text style={headerTitle}>User Infomation</Text>
+                    <Text style={headerTitle}>Thông tin tài khoản</Text>
                     <TouchableOpacity onPress={this.goBacktoMain.bind(this)}>
                         <Image source={backSpecial} style={backIconStyle} />
                     </TouchableOpacity>
@@ -65,27 +65,27 @@ export default class ChangeInfo extends Component {
                 <View style={body}>
                     <TextInput
                         style={textInput}
-                        placeholder="Enter your name"
+                        placeholder="Nhập tên của bạn"
                         autoCapitalize="none"
                         value={txtName}
                         onChangeText={text => this.setState({ ...this.state, txtName: text })}
                     />
                     <TextInput
                         style={textInput}
-                        placeholder="Enter your address"
+                        placeholder="Nhập địa chỉ nhà của bạn"
                         autoCapitalize="none"
                         value={txtAddress}
                         onChangeText={text => this.setState({ ...this.state, txtAddress: text })}
                     />
                     <TextInput
                         style={textInput}
-                        placeholder="Enter your phone number"
+                        placeholder="Nhập số điện thoại của bạn"
                         autoCapitalize="none"
                         value={txtPhone}
                         onChangeText={text => this.setState({ ...this.state, txtPhone: text })}
                     />
                     <TouchableOpacity style={signInContainer} onPress={this.change.bind(this)}>
-                        <Text style={signInTextStyle}>CHANGE YOUR INFOMATION</Text>
+                        <Text style={signInTextStyle}>Thay đổi thông tin của bạn</Text>
                     </TouchableOpacity>
                 </View>
             </View>

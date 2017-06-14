@@ -15,8 +15,8 @@ export default class SignIn extends Component {
     }
     onFail() {
         Alert.alert(
-            'Notice',
-            'Sign in not successfully. Let check password again.',
+            'Thông báo',
+            'Đăng nhập không thành công, hãy nhập lại mật khẩu',
             [
                 { text: 'OK', onPress: () => this.removePassword() },
             ],
@@ -29,7 +29,7 @@ export default class SignIn extends Component {
     onSignIn() {
         const { email, password } = this.state;
         if(email === '' || password === '') {
-            ToastAndroid.show('Please do not leave your username and password blank', ToastAndroid.SHORT);
+            ToastAndroid.show('Xin đừng để trống email và mật khẩu', ToastAndroid.SHORT);
             return false;
         }
         login(email, password)
@@ -37,7 +37,7 @@ export default class SignIn extends Component {
                 // console.log(resJSON);
                 global.onSignIn(resJSON.user);
                 saveToken(resJSON.token);
-                ToastAndroid.show('Sign in successfully.', ToastAndroid.SHORT);
+                ToastAndroid.show('Đăng nhập thành công', ToastAndroid.SHORT);
                 this.props.goBacktoMain();
             })
             .catch(err => {
@@ -53,20 +53,20 @@ export default class SignIn extends Component {
                 <TextInput
                     style={inputStyle}
                     underlineColorAndroid='transparent'
-                    placeholder='Enter your email'
+                    placeholder='Nhập email của bạn'
                     onChangeText={(text) => this.setState({ email: text })}
                     value={email}
                 />
                 <TextInput
                     style={inputStyle}
                     underlineColorAndroid='transparent'
-                    placeholder='Enter your password'
+                    placeholder='Nhập mật khẩu của bạn'
                     secureTextEntry
                     onChangeText={(text) => this.setState({ password: text })}
                     value={password}
                 />
                 <TouchableOpacity style={bigButton} onPress={this.onSignIn.bind(this)}>
-                    <Text style={buttonText}>SIGN IN NOW</Text>
+                    <Text style={buttonText}>Đăng nhập ngay</Text>
                 </TouchableOpacity>
             </View>
         );

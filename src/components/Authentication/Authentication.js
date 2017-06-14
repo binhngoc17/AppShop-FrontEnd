@@ -60,16 +60,16 @@ export default class Authentication extends Component {
                     <TouchableOpacity onPress={this.goBacktoMain.bind(this)}>
                         <Image source={iconBack} style={iconStyle} />
                     </TouchableOpacity>
-                    <Text style={titleStyle}>Wearing a Dress</Text>
+                    <Text style={titleStyle}>Gạo Ngon & Rẻ</Text>
                     <Image source={iconLogo} style={iconStyle} />
                 </View>
                 {mainJSX}
                 <View style={controlStyle}>
                     <TouchableOpacity style={signInStyle} onPress={this.signIn.bind(this)}>
-                        <Text style={isSignIn ? activeStyle : inactiveStyle}>SIGN IN</Text>
+                        <Text style={isSignIn ? activeStyle : inactiveStyle}>Đăng nhập</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={signUpStyle} onPress={this.signUp.bind(this)}>
-                        <Text style={!isSignIn ? activeStyle : inactiveStyle}>SIGN UP</Text>
+                        <Text style={!isSignIn ? activeStyle : inactiveStyle}>Đăng ký</Text>
                     </TouchableOpacity>
                 </View>
             </View>

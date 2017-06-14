@@ -41,13 +41,13 @@ export default class Header extends Component {
                     <TouchableOpacity onPress={this.props.openDrawer}>
                         <Image source={iconMenu} style={iconStyle} />
                     </TouchableOpacity>
-                    <Text style={titleStyle}>Wearing a Dress</Text>
+                    <Text style={titleStyle}>Gạo Ngon & Rẻ</Text>
                     <Image source={iconLogo} style={iconStyle} />
                 </View>
                 <TextInput
                     style={textInput}
                     underlineColorAndroid='transparent'
-                    placeholder="What do you want to buy?"
+                    placeholder="Bạn muốn mua gì?"
                     onChangeText={text => this.setState({ txtSearch: text })}
                     value={this.state.txtSearch}
                     onSubmitEditing={this.search.bind(this)}

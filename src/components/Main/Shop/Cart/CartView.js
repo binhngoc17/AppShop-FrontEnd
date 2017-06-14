@@ -12,7 +12,12 @@ import global from '../../../global';
 import getToken from '../../../../api/getToken';
 import sendOrder from '../../../../api/sendOrder';
 
-const url = 'http://10.0.2.2/api/images/product/';
+import baseURL from '../../../../api/connect';
+const url = `${baseURL}/api/images/product/`;
+
+import iconAdd from '../../../../media/appIcon/ic_add.png';
+import iconMinus from '../../../../media/appIcon/ic_minus.png';
+import iconClose from '../../../../media/appIcon/ic_close.png';
 
 function toTitleCase(str) {
     return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
@@ -23,7 +28,7 @@ export default class CartView extends Component {
         try {
             const token = await getToken();
             if (token === '' || token === 'TOKEN_KHONG_HOP_LE') {
-                ToastAndroid.show('Please sign in to continue.', ToastAndroid.SHORT);
+                ToastAndroid.show('Vui lòng đăng nhập để tiếp tục', ToastAndroid.SHORT);
                 return false;
             }
             const { cartArray } = this.props;
@@ -33,10 +38,10 @@ export default class CartView extends Component {
             }));
             const res = await sendOrder(token, arrayDetail);
             if (res === "THEM_THANH_CONG") {
-                ToastAndroid.show('Transaction successfully', ToastAndroid.SHORT);
+                ToastAndroid.show('Đặt hàng thành công', ToastAndroid.SHORT);
             }
             else {
-                ToastAndroid.show('Oh, something is wrong, please try again later, We are so sorry!', ToastAndroid.SHORT);
+                ToastAndroid.show('Oh, có lỗi gì đó, vui lòng thử lại sau, chúng tôi xin lỗi bạn', ToastAndroid.SHORT);
             }
         } catch (error) {
             console.log(error);
@@ -58,7 +63,7 @@ export default class CartView extends Component {
         const { main, checkoutButton, checkoutTitle, wrapper,
             productStyle, mainRight, productController,
             txtName, txtPrice, productImage, numberOfProduct,
-            txtShowDetail, showDetailContainer } = styles;
+            txtShowDetail, showDetailContainer, txtQuantity, iconStyle } = styles;
         const { cartArray } = this.props;
         const arrTotalMoneyonProduct = cartArray.map(e => e.product.price * e.quantity);
         const TotalMoneyonBill = arrTotalMoneyonProduct.length ? arrTotalMoneyonProduct.reduce((a, b) => a + b) : 0;
@@ -75,24 +80,24 @@ export default class CartView extends Component {
                                 <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
                                     <Text style={txtName}>{toTitleCase(cartItem.product.name)}</Text>
                                     <TouchableOpacity onPress={() => this.removeProduct(cartItem.product.id)}>
-                                        <Text style={{ fontFamily: 'Avenir', color: '#969696' }}>X</Text>
+                                        <Image source={iconClose} style={iconStyle}/>
                                     </TouchableOpacity>
                                 </View>
                                 <View>
-                                    <Text style={txtPrice}>{cartItem.product.price}$</Text>
+                                    <Text style={txtPrice}>{cartItem.product.price}đ</Text>
                                 </View>
                                 <View style={productController}>
                                     <View style={numberOfProduct}>
                                         <TouchableOpacity onPress={() => this.incrQuantity(cartItem.product.id)}>
-                                            <Text>+</Text>
+                                            <Image source={iconAdd} style={{ width: 20, height: 20 }}/>
                                         </TouchableOpacity>
-                                        <Text>{cartItem.quantity}</Text>
+                                        <Text style={txtQuantity}>{cartItem.quantity}</Text>
                                         <TouchableOpacity onPress={() => this.decrQuantity(cartItem.product.id)}>
-                                            <Text>-</Text>
+                                            <Image source={iconMinus} style={{ width: 20, height: 20 }}/>
                                         </TouchableOpacity>
                                     </View>
                                     <TouchableOpacity style={showDetailContainer} onPress={() => this.gotoProductDetail(cartItem.product)}>
-                                        <Text style={txtShowDetail}>SHOW DETAILS</Text>
+                                        <Text style={txtShowDetail}>Xem chi tiết</Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -100,7 +105,7 @@ export default class CartView extends Component {
                     )}
                 />
                 <TouchableOpacity style={checkoutButton} onPress={this.onSendOrder.bind(this)}>
-                    <Text style={checkoutTitle}>TOTAL {TotalMoneyonBill}$ CHECKOUT NOW</Text>
+                    <Text style={checkoutTitle}>TỔNG {TotalMoneyonBill}đ THANH TOÁN</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -116,6 +121,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#DFDFDF'
     },
+    iconStyle: { width: 15, height: 15 },
     checkoutButton: {
         height: 50,
         margin: 10,
@@ -164,7 +170,7 @@ const styles = StyleSheet.create({
     },
     txtName: {
         paddingLeft: 20,
-        color: '#A7A7A7',
+        color: '#34B089',
         fontSize: 20,
         fontWeight: '400',
         fontFamily: 'Avenir'
@@ -178,10 +184,16 @@ const styles = StyleSheet.create({
     },
     txtShowDetail: {
         color: '#C21C70',
-        fontSize: 10,
+        fontSize: 13,
         fontWeight: '400',
         fontFamily: 'Avenir',
         textAlign: 'right',
+    },
+    txtQuantity: {
+        color: '#34B089',
+        fontSize: 15,
+        fontWeight: '400',
+        fontFamily: 'Avenir',
     },
     showDetailContainer: {
         flex: 1,

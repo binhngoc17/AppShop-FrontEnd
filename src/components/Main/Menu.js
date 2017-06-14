@@ -44,7 +44,7 @@ export default class Menu extends Component {
         const logoutJSX = (
             <View style={{ flex: 1 }}>
                 <TouchableOpacity style={btnStyle} onPress={this.gotoAuthentication.bind(this)}>
-                    <Text style={btnText}>Sign In</Text>
+                    <Text style={btnText}>Đăng Nhập</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -53,13 +53,13 @@ export default class Menu extends Component {
                 <Text style={usernameTitle}>{user ? user.name : ''}</Text>
                 <View>
                     <TouchableOpacity style={btnSignInStyle} onPress={this.gotoOrderHistory.bind(this)}>
-                        <Text style={btnTextSignIn}>Order History</Text>
+                        <Text style={btnTextSignIn}>Lịch Sử Đơn Hàng</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={btnSignInStyle} onPress={this.gotoChangeInfo.bind(this)}>
-                        <Text style={btnTextSignIn}>Change Info</Text>
+                        <Text style={btnTextSignIn}>Thay Đổi Thông Tin</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={btnSignInStyle} onPress={this.onSignOut.bind(this)}>
-                        <Text style={btnTextSignIn}>Sign out</Text>
+                        <Text style={btnTextSignIn}>Đăng Xuất</Text>
                     </TouchableOpacity>
                 </View>
                 <View />
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     btnText: {
         color: '#34B089',
         fontFamily: 'Avenir',
-        fontSize: 15
+        fontSize: 13
     },
     btnSignInStyle: {
         height: 50,
@@ -113,7 +113,8 @@ const styles = StyleSheet.create({
     },
     btnTextSignIn: {
         color: '#34B089',
-        fontSize: 15
+        fontFamily: 'Avenir',
+        fontSize: 13
     },
     loginContainer: {
         flex: 1,

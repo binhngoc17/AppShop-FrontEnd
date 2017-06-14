@@ -43,20 +43,20 @@ export default class OrderHistory extends Component {
                 {arrOrder.map(e => (
                     <View style={orderRow} key={e.id}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Order id:</Text>
+                            <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Mã đơn hàng:</Text>
                             <Text style={{ color: '#2ABB9C' }}>ORD{e.id}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>OrderTime:</Text>
+                            <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Thời gian:</Text>
                             <Text style={{ color: '#C21C70' }}>{e.date_order}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Status:</Text>
-                            <Text style={{ color: '#2ABB9C' }}>{e.status ? "pending" : "complete"}</Text>
+                            <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Tình trạng:</Text>
+                            <Text style={{ color: '#2ABB9C' }}>{e.status ? "Hoàn thành" : "Đang xử lý"}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Total:</Text>
-                            <Text style={{ color: '#C21C70', fontWeight: 'bold' }}>{e.total}$</Text>
+                            <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Tổng tiền:</Text>
+                            <Text style={{ color: '#C21C70', fontWeight: 'bold' }}>{e.total}đ</Text>
                         </View>
                     </View>
                 ))}
@@ -66,7 +66,7 @@ export default class OrderHistory extends Component {
             <View style={wrapper}>
                 <View style={header}>
                     <View />
-                    <Text style={headerTitle}>Order History</Text>
+                    <Text style={headerTitle}>Lịch sử đơn hàng</Text>
                     <TouchableOpacity onPress={this.goBacktoMain.bind(this)}>
                         <Image source={backSpecial} style={backIconStyle} />
                     </TouchableOpacity>
