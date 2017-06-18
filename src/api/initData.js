@@ -1,5 +1,5 @@
 import baseURL from './connect';
-const URL = `${baseURL}/api`;
+const URL = `${baseURL}/api/init`; //them /init voi AppGao_services
 
 const initData = () => (
     fetch(URL)

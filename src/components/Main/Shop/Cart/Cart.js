@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import CartView from './CartView';
 import ProductDetail from '../ProductDetail/ProductDetail';
+import FormOrder from '../FormOrder/FormOrder';
 
 export default class Cart extends Component {
     renderScene(route, navigator) {
@@ -12,7 +13,9 @@ export default class Cart extends Component {
             case 'CART_VIEW':
                 return <CartView navigator={navigator} cartArray={cartArray} />;
             case 'PRODUCT_DETAIL':
-                return <ProductDetail navigator={navigator} product={route.product}/>;
+                return <ProductDetail navigator={navigator} product={route.product} />;
+            case 'FORM_ORDER':
+                return <FormOrder navigator={navigator} />;
         }
 
     }

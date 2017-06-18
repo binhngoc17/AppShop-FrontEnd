@@ -34,6 +34,7 @@ export default class CartView extends Component {
             const { cartArray } = this.props;
             const arrayDetail = cartArray.map(e => ({
                 id: e.product.id,
+                price: e.product.price,
                 quantity: e.quantity
             }));
             const res = await sendOrder(token, arrayDetail);
@@ -58,6 +59,9 @@ export default class CartView extends Component {
     }
     gotoProductDetail(product) {
         this.props.navigator.push({ name: 'PRODUCT_DETAIL', product });
+    }
+    gotoFormOrder() {
+        this.props.navigator.push({ name: 'FORM_ORDER' });
     }
     render() {
         const { main, checkoutButton, checkoutTitle, wrapper,
@@ -104,8 +108,8 @@ export default class CartView extends Component {
                         </View>
                     )}
                 />
-                <TouchableOpacity style={checkoutButton} onPress={this.onSendOrder.bind(this)}>
-                    <Text style={checkoutTitle}>TỔNG {TotalMoneyonBill}đ THANH TOÁN</Text>
+                <TouchableOpacity style={checkoutButton} onPress={this.gotoFormOrder.bind(this)}>
+                    <Text style={checkoutTitle}>TỔNG {TotalMoneyonBill}đ - THANH TOÁN</Text>
                 </TouchableOpacity>
             </View>
         );

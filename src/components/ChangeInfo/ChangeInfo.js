@@ -65,6 +65,7 @@ export default class ChangeInfo extends Component {
                 <View style={body}>
                     <TextInput
                         style={textInput}
+                        underlineColorAndroid='transparent'
                         placeholder="Nhập tên của bạn"
                         autoCapitalize="none"
                         value={txtName}
@@ -72,6 +73,7 @@ export default class ChangeInfo extends Component {
                     />
                     <TextInput
                         style={textInput}
+                        underlineColorAndroid='transparent'
                         placeholder="Nhập địa chỉ nhà của bạn"
                         autoCapitalize="none"
                         value={txtAddress}
@@ -79,6 +81,7 @@ export default class ChangeInfo extends Component {
                     />
                     <TextInput
                         style={textInput}
+                        underlineColorAndroid='transparent'
                         placeholder="Nhập số điện thoại của bạn"
                         autoCapitalize="none"
                         value={txtPhone}

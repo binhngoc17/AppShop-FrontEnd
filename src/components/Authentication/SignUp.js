@@ -109,12 +109,6 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         paddingLeft: 30
     },
-    alertRePassStyle: {
-        height: 50,
-        color: '#f44336',
-        marginBottom: 2,
-        paddingLeft: 30
-    },
     bigButton: {
         height: 50,
         borderRadius: 20,
