@@ -55,7 +55,7 @@ export default class ProductDetail extends Component {
                             <Text style={textMain}>
                                 <Text style={textBlack}>{name.toUpperCase()}</Text>
                                 <Text style={textHighlight}> / </Text>
-                                <Text style={textSmoke}>{price}đ</Text>
+                                <Text style={textSmoke}>VNĐ {price}</Text>
                             </Text>
                         </View>
                         <View style={descContainer}>

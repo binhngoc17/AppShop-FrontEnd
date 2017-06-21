@@ -34,7 +34,7 @@ export default class TopProduct extends Component {
                         <TouchableOpacity style={productContainer} onPress={() => this.gotoProductDetail(product)}>
                             <Image source={{uri: `${url}${product.images[0]}`}} style={productImage} />
                             <Text style={produceName}>{product.name.toUpperCase()}</Text>
-                            <Text style={producePrice}>{product.price}đ</Text>
+                            <Text style={producePrice}>VNĐ {product.price}</Text>
                         </TouchableOpacity>
                     )}
                     enableEmptySections

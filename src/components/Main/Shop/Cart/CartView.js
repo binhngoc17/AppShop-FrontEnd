@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import global from '../../../global';
 import getToken from '../../../../api/getToken';
-import sendOrder from '../../../../api/sendOrder';
 
 import baseURL from '../../../../api/connect';
 const url = `${baseURL}/api/images/product/`;
@@ -24,30 +23,6 @@ function toTitleCase(str) {
 }
 
 export default class CartView extends Component {
-    async onSendOrder() {
-        try {
-            const token = await getToken();
-            if (token === '' || token === 'TOKEN_KHONG_HOP_LE') {
-                ToastAndroid.show('Vui lòng đăng nhập để tiếp tục', ToastAndroid.SHORT);
-                return false;
-            }
-            const { cartArray } = this.props;
-            const arrayDetail = cartArray.map(e => ({
-                id: e.product.id,
-                price: e.product.price,
-                quantity: e.quantity
-            }));
-            const res = await sendOrder(token, arrayDetail);
-            if (res === "THEM_THANH_CONG") {
-                ToastAndroid.show('Đặt hàng thành công', ToastAndroid.SHORT);
-            }
-            else {
-                ToastAndroid.show('Oh, có lỗi gì đó, vui lòng thử lại sau, chúng tôi xin lỗi bạn', ToastAndroid.SHORT);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
     incrQuantity(productId) {
         global.incrQuantity(productId);
     }
@@ -61,7 +36,15 @@ export default class CartView extends Component {
         this.props.navigator.push({ name: 'PRODUCT_DETAIL', product });
     }
     gotoFormOrder() {
-        this.props.navigator.push({ name: 'FORM_ORDER' });
+        getToken()
+            .then(token => {
+                if (token === '' || token === 'TOKEN_KHONG_HOP_LE') {
+                    ToastAndroid.show('Vui lòng đăng nhập để tiếp tục', ToastAndroid.SHORT);
+                    return;
+                }
+                this.props.navigator.push({ name: 'FORM_ORDER' });
+            })
+            .catch(err => console.log(err));
     }
     render() {
         const { main, checkoutButton, checkoutTitle, wrapper,
@@ -84,7 +67,7 @@ export default class CartView extends Component {
                                 <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
                                     <Text style={txtName}>{toTitleCase(cartItem.product.name)}</Text>
                                     <TouchableOpacity onPress={() => this.removeProduct(cartItem.product.id)}>
-                                        <Image source={iconClose} style={iconStyle}/>
+                                        <Image source={iconClose} style={iconStyle} />
                                     </TouchableOpacity>
                                 </View>
                                 <View>
@@ -93,11 +76,11 @@ export default class CartView extends Component {
                                 <View style={productController}>
                                     <View style={numberOfProduct}>
                                         <TouchableOpacity onPress={() => this.incrQuantity(cartItem.product.id)}>
-                                            <Image source={iconAdd} style={{ width: 20, height: 20 }}/>
+                                            <Image source={iconAdd} style={{ width: 20, height: 20 }} />
                                         </TouchableOpacity>
                                         <Text style={txtQuantity}>{cartItem.quantity}</Text>
                                         <TouchableOpacity onPress={() => this.decrQuantity(cartItem.product.id)}>
-                                            <Image source={iconMinus} style={{ width: 20, height: 20 }}/>
+                                            <Image source={iconMinus} style={{ width: 20, height: 20 }} />
                                         </TouchableOpacity>
                                     </View>
                                     <TouchableOpacity style={showDetailContainer} onPress={() => this.gotoProductDetail(cartItem.product)}>

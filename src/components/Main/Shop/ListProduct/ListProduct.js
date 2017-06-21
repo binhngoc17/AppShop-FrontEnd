@@ -82,7 +82,7 @@ export default class ListProduct extends Component {
                         <Image style={productImage} source={{ uri: `${url}${product.images[0]}` }} />
                         <View style={productInfo}>
                             <Text style={txtName}>{toTitleCase(product.name)}</Text>
-                            <Text style={txtPrice}>{product.price}đ</Text>
+                            <Text style={txtPrice}>VNĐ {product.price}</Text>
                             <Text style={txtMaterial}>null</Text>
                             <View style={lastRowInfo}>
                                 <Text style={txtColor}>null</Text>

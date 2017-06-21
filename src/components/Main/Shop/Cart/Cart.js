@@ -15,7 +15,7 @@ export default class Cart extends Component {
             case 'PRODUCT_DETAIL':
                 return <ProductDetail navigator={navigator} product={route.product} />;
             case 'FORM_ORDER':
-                return <FormOrder navigator={navigator} />;
+                return <FormOrder navigator={navigator} cartArray={cartArray} />;
         }
 
     }
