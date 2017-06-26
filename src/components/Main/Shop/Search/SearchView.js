@@ -47,10 +47,10 @@ export default class SearchView extends Component {
                             <Image source={{ uri: `${url}${product.images[0]}` }} style={productImage} />
                             <View style={mainRight}>
                                 <Text style={txtName}>{toTitleCase(product.name)}</Text>
-                                <Text style={txtPrice}>{product.price}đ</Text>
-                                <Text style={txtMaterial}>null</Text>
+                                <Text style={txtPrice}>VNĐ {product.price}</Text>
+                                <View />
                                 <View style={lastRowInfo} >
-                                    <Text style={txtColor}>null</Text>
+                                    <View />
                                     <View />
                                     <TouchableOpacity onPress={() => this.gotoProductDetail(product)}>
                                         <Text style={txtShowDetail}>Xem chi tiết</Text>

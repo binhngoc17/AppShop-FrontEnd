@@ -71,7 +71,7 @@ export default class CartView extends Component {
                                     </TouchableOpacity>
                                 </View>
                                 <View>
-                                    <Text style={txtPrice}>{cartItem.product.price}đ</Text>
+                                    <Text style={txtPrice}>VNĐ {cartItem.product.price}</Text>
                                 </View>
                                 <View style={productController}>
                                     <View style={numberOfProduct}>
@@ -92,7 +92,7 @@ export default class CartView extends Component {
                     )}
                 />
                 <TouchableOpacity style={checkoutButton} onPress={this.gotoFormOrder.bind(this)}>
-                    <Text style={checkoutTitle}>TỔNG {TotalMoneyonBill}đ - THANH TOÁN</Text>
+                    <Text style={checkoutTitle}>TỔNG VNĐ {TotalMoneyonBill} - THANH TOÁN</Text>
                 </TouchableOpacity>
             </View>
         );

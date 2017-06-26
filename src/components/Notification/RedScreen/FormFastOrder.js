@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
-import {
-    View, Text, StyleSheet, TextInput,
-    ScrollView, TouchableOpacity, Image, ToastAndroid, Picker,
-} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, Picker, ScrollView, TextInput, ToastAndroid, Alert } from 'react-native';
 
-import global from '../../../global';
-import getInfoFormOrder from '../../../../api/getInfoFormOrder';
-import getToken from '../../../../api/getToken';
-import sendOrder from '../../../../api/sendOrder';
+import getToken from '../../../api/getToken';
+import getInfoFormOrder from '../../../api/getInfoFormOrder';
+import sendOrder from '../../../api/sendOrder';
 
-import iconClose from '../../../../media/appIcon/ic_close.png';
-import iconUser from '../../../../media/appIcon/ic_user.png';
-import iconPhone from '../../../../media/appIcon/ic_phone.png';
+import iconClose from '../../../media/appIcon/ic_close.png';
+import iconAdd from '../../../media/appIcon/ic_add.png';
+import iconMinus from '../../../media/appIcon/ic_minus.png';
+import iconUser from '../../../media/appIcon/ic_user.png';
+import iconPhone from '../../../media/appIcon/ic_phone.png';
 
-export default class FormOrder extends Component {
+export default class FormFastOrder extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -22,6 +20,7 @@ export default class FormOrder extends Component {
             district: '',
             city: '',
             numMonth: 1,
+            cartArray: [],
         };
     }
     componentDidMount() {
@@ -33,6 +32,7 @@ export default class FormOrder extends Component {
                     address: resJSON.addr.address,
                     district: resJSON.addr.district,
                     city: resJSON.addr.city,
+                    cartArray: [...resJSON.arrayDetail],
                 });
             })
             .catch(err => console.log("error get info form: " + err));
@@ -40,11 +40,10 @@ export default class FormOrder extends Component {
     async onSendOrder() {
         try {
             const token = await getToken();
-            const { address, district, city, numMonth } = this.state;
-            const { cartArray } = this.props;
+            const { address, district, city, numMonth, cartArray } = this.state;
             const arrayDetail = cartArray.map(e => ({
-                id: e.product.id,
-                price: e.product.price,
+                id: e.id,
+                price: e.price,
                 quantity: e.quantity
             }));
             const res = await sendOrder(token, numMonth, address, district, city, arrayDetail);
@@ -58,18 +57,78 @@ export default class FormOrder extends Component {
             console.log(error);
         }
     }
-    gotoBack() {
-        this.props.navigator.pop();
+    incrQuantity(productId) {
+        const newCart = this.state.cartArray.map(e => {
+            if (e.id !== productId)
+                return e;
+            return { id: e.id, name: e.name, price: e.price, quantity: e.quantity + 1 };
+        });
+        this.setState({ cartArray: newCart });
+    }
+    decrQuantity(productId) {
+        const newCart = this.state.cartArray.map(e => {
+            if (e.id !== productId)
+                return e;
+            if (e.quantity === 1)
+                return e;
+            return { id: e.id, name: e.name, price: e.price, quantity: e.quantity - 1 };
+        });
+        this.setState({ cartArray: newCart });
+    }
+    gotoMain() {
+        Alert.alert(
+            'Thông báo',
+            'Bạn không muốn đặt hàng nhanh theo đơn hàng cũ. Lựa chọn sản phẩm khác?',
+            [
+                { text: 'OK', onPress: () => this.props.navigator.push({ name: 'Main' }) },
+            ],
+            { cancelable: false }
+        )
     }
     render() {
-        const { user, address, district, city, numMonth } = this.state;
-        const { container, formWrapper, infoWrapper, titleStyle, inputStyle, bigButton, buttonText, iconStyle, } = styles;
+        const { user, address, district, city, numMonth, cartArray } = this.state;
+        const { container, formWrapper, infoWrapper, productWrapper, titleStyle,
+            inputStyle, bigButton, buttonText, iconStyle, numberOfProduct, txtPriceStyle } = styles;
+        const arrTotalMoneyonProduct = cartArray.map(e => e.price * e.quantity);
+        const TotalMoneyonBill = arrTotalMoneyonProduct.length ? arrTotalMoneyonProduct.reduce((a, b) => a + b) : 0;
+        const productsJSX = (
+            <View style={infoWrapper}>
+                <Text style={titleStyle}>Sản phẩm theo đơn hàng mới nhất:</Text>
+                {cartArray.map(e => (
+                    <View style={productWrapper} key={e.id}>
+                        <View style={numberOfProduct}>
+                            <View />
+                            <Text style={titleStyle}>{e.name}</Text>
+                            <View />
+                        </View>
+                        <View style={numberOfProduct}>
+                            <View />
+                            <Text style={titleStyle}>VNĐ {e.price}</Text>
+                            <View />
+                        </View>
+                        <View style={numberOfProduct}>
+                            <TouchableOpacity onPress={() => this.incrQuantity(e.id)}>
+                                <Image source={iconAdd} style={{ width: 20, height: 20 }} />
+                            </TouchableOpacity>
+                            <Text style={titleStyle}>{e.quantity} kg</Text>
+                            <TouchableOpacity onPress={() => this.decrQuantity(e.id)}>
+                                <Image source={iconMinus} style={{ width: 20, height: 20 }} />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                ))}
+                <View style={productWrapper}>
+                    <Text style={txtPriceStyle}>Tổng: VNĐ {TotalMoneyonBill}</Text>
+                </View>
+            </View>
+        );
         return (
             <ScrollView style={container}>
                 <View style={formWrapper}>
-                    <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'flex-end' }} onPress={this.gotoBack.bind(this)} >
+                    <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'flex-end' }} onPress={this.gotoMain.bind(this)} >
                         <Image source={iconClose} style={iconStyle} />
                     </TouchableOpacity>
+                    {cartArray.length ? productsJSX : null}
                     <View style={infoWrapper}>
                         <Text style={titleStyle}>Người đặt hàng:</Text>
                         <View style={{ flexDirection: 'row', padding: 5 }}>
@@ -144,6 +203,20 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderColor: '#90A4AE',
     },
+    productWrapper: {
+        borderColor: '#90A4AE',
+        borderTopWidth: 0.5,
+        padding: 5,
+    },
+    numberOfProduct: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+    },
+    txtPriceStyle: {
+        color: '#C21C70',
+        fontSize: 20,
+        fontWeight: '400',
+    },
     titleStyle: {
         fontSize: 15,
         marginBottom: 10,
@@ -169,15 +242,3 @@ const styles = StyleSheet.create({
     },
     iconStyle: { width: 20, height: 20 },
 });
-
-/**
- * <TextInput
-    style={inputStyle}
-    underlineColorAndroid='#90A4AE'
-    placeholder='1 tháng'
-    value={numMonth}
-    onChangeText={(text) => {
-        this.setState({ numMonth: parseInt(text) })
-    }}
-/>
- */

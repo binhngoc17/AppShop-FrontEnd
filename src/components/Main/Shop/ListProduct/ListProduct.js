@@ -83,9 +83,9 @@ export default class ListProduct extends Component {
                         <View style={productInfo}>
                             <Text style={txtName}>{toTitleCase(product.name)}</Text>
                             <Text style={txtPrice}>VNĐ {product.price}</Text>
-                            <Text style={txtMaterial}>null</Text>
+                            <View />
                             <View style={lastRowInfo}>
-                                <Text style={txtColor}>null</Text>
+                                <View />
                                 <View />
                                 <TouchableOpacity onPress={() => this.gotoProductDetail(product)}>
                                     <Text style={txtShowDetail}>Xem chi tiết</Text>

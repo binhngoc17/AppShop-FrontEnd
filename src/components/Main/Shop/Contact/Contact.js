@@ -6,12 +6,10 @@ import {
     Image, Dimensions,
 } from 'react-native';
 
-import map from '../../../../media/appIcon/map.png';
-
-import phoneIcon from '../../../../media/appIcon/phone.png';
+import phoneIcon from '../../../../media/appIcon/ic_phone.png';
 import mailIcon from '../../../../media/appIcon/mail.png';
-import messageIcon from '../../../../media/appIcon/message.png';
 import locationIcon from '../../../../media/appIcon/location.png';
+import facebookIcon from '../../../../media/appIcon/ic_FB.png';
 
 export default class Contact extends Component {
     render() {
@@ -35,8 +33,8 @@ export default class Contact extends Component {
                         <Text style={infoText}>thai.huynh8324@gmail.com</Text>
                     </View>
                     <View style={[rowInfoContainer, { borderBottomWidth: 0 }]}>
-                        <Image source={messageIcon} style={imageStyle} />
-                        <Text style={infoText}>(+84) 0913675214</Text>
+                        <Image source={facebookIcon} style={imageStyle} />
+                        <Text style={infoText}>www.facebook.com/thaihq.148</Text>
                     </View>
                 </View>
             </View>

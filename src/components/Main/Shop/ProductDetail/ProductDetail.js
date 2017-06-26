@@ -64,10 +64,6 @@ export default class ProductDetail extends Component {
                                     {description}
                                 </Text>
                             </ScrollView>
-                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 15 }}>
-                                <Text style={txtMaterial}>null</Text>
-                                <Text style={txtColor}>null</Text>
-                            </View>
                         </View>
                     </View>
                 </View>
