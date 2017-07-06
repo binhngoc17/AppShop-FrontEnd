@@ -8,6 +8,8 @@ import global from '../../../global';
 import getInfoFormOrder from '../../../../api/getInfoFormOrder';
 import getToken from '../../../../api/getToken';
 import sendOrder from '../../../../api/sendOrder';
+import setUnitOnBill from '../../../../api/setUnitOnBill';
+import saveCart from '../../../../api/saveCart';
 
 import iconClose from '../../../../media/appIcon/ic_close.png';
 import iconUser from '../../../../media/appIcon/ic_user.png';
@@ -47,13 +49,24 @@ export default class FormOrder extends Component {
                 price: e.product.price,
                 quantity: e.quantity
             }));
+
+            const arrProductId = cartArray.map(e => (e.product.id));
+
             const res = await sendOrder(token, numMonth, address, district, city, arrayDetail);
             if (res === "THEM_THANH_CONG") {
+                saveCart([]);
                 ToastAndroid.show('Đặt hàng thành công', ToastAndroid.SHORT);
             }
             else {
                 ToastAndroid.show('Oh, có lỗi gì đó, vui lòng thử lại sau, chúng tôi xin lỗi bạn', ToastAndroid.SHORT);
             }
+
+            let len = arrProductId.length;
+            for (let index = 0; index < len; index++) {
+                let productId = arrProductId[index];
+                let res = await setUnitOnBill(productId);
+            }
+
         } catch (error) {
             console.log(error);
         }

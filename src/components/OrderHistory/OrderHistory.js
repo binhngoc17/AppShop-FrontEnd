@@ -47,8 +47,8 @@ export default class OrderHistory extends Component {
                             <Text style={{ color: '#2ABB9C' }}>ORD{e.id}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Thời gian:</Text>
-                            <Text style={{ color: '#C21C70' }}>{e.date_order}</Text>
+                            <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Ngày đặt::</Text>
+                            <Text style={{ color: '#C21C70' }}>{new Date(e.date_order).toDateString()}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                             <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Tình trạng:</Text>
@@ -56,7 +56,7 @@ export default class OrderHistory extends Component {
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                             <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>Tổng tiền:</Text>
-                            <Text style={{ color: '#C21C70', fontWeight: 'bold' }}>{e.total}đ</Text>
+                            <Text style={{ color: '#C21C70', fontWeight: 'bold' }}>{e.total} VNĐ</Text>
                         </View>
                     </View>
                 ))}

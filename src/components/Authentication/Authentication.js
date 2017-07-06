@@ -110,9 +110,9 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 20
     },
     inactiveStyle: {
-        color: '#D7D7D7'
+        color: '#66BB6A'
     },
     activeStyle: {
-        color: '#3EBA77'
+        color: '#2E7D32'
     },
 });

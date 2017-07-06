@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
-    iconStyle: { width: 250, height: 250 },
+    iconStyle: { width: 200, height: 200 },
     textStyle: {
         fontSize: 20,
         color: '#FAFAFA',
