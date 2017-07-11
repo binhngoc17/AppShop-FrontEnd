@@ -54,6 +54,7 @@ export default class SignIn extends Component {
                     style={inputStyle}
                     underlineColorAndroid='transparent'
                     placeholder='Nhập email của bạn'
+                    keyboardType='email-address'
                     onChangeText={(text) => this.setState({ email: text })}
                     value={email}
                 />

@@ -73,6 +73,7 @@ export default class SignUp extends Component {
                     style={inputStyle}
                     underlineColorAndroid='transparent'
                     placeholder='Nhập email của bạn'
+                    keyboardType='email-address'
                     onChangeText={(text) => this.setState({ email: text })}
                     value={email}
                 />

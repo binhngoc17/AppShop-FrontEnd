@@ -84,11 +84,11 @@ export default class OrderHistory extends Component {
 const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
-    wrapper: { flex: 1, backgroundColor: '#fff' },
+    wrapper: { flex: 1, backgroundColor: '#DFDFDF' },
     header: { flex: 1, backgroundColor: '#2ABB9C', alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row', paddingHorizontal: 10 },// eslint-disable-line
     headerTitle: { fontFamily: 'Avenir', color: '#fff', fontSize: 20 },
     backIconStyle: { width: 30, height: 30 },
-    body: { flex: 10, backgroundColor: '#F6F6F6' },
+    body: { flex: 10, backgroundColor: '#DFDFDF' },
     orderRow: {
         height: width / 3,
         backgroundColor: '#FFF',
