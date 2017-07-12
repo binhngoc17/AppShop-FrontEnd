@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Image, Picker, ScrollView, Te
 import getToken from '../../../api/getToken';
 import getInfoFormOrder from '../../../api/getInfoFormOrder';
 import sendOrder from '../../../api/sendOrder';
+import setUnitOnBill from '../../../api/setUnitOnBill';
 
 import iconClose from '../../../media/appIcon/ic_close.png';
 import iconAdd from '../../../media/appIcon/ic_add.png';
@@ -46,12 +47,18 @@ export default class FormFastOrder extends Component {
                 price: e.price,
                 quantity: e.quantity
             }));
+            const arrProductId = cartArray.map(e => (e.id));
             const res = await sendOrder(token, numMonth, address, district, city, arrayDetail);
             if (res === "THEM_THANH_CONG") {
                 ToastAndroid.show('Đặt hàng thành công', ToastAndroid.SHORT);
             }
             else {
                 ToastAndroid.show('Oh, có lỗi gì đó, vui lòng thử lại sau, chúng tôi xin lỗi bạn', ToastAndroid.SHORT);
+            }
+            let len = arrProductId.length;
+            for (let index = 0; index < len; index++) {
+                let productId = arrProductId[index];
+                let res = await setUnitOnBill(productId);
             }
         } catch (error) {
             console.log(error);
