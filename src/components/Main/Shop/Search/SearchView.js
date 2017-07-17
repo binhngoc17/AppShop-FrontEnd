@@ -1,3 +1,7 @@
+/**
+ * SearchView Component:
+ * - render màn hình tìm kiếm, hiện danh sách kết quả tìm kiếm.
+ */
 import React, { Component } from 'react';
 import {
     View,

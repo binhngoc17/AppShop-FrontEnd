@@ -1,3 +1,7 @@
+/**
+ * Authentication Component
+ * - navigation giữa SignIn và SignUp.
+ */
 import React, { Component } from 'react';
 import {
     View,

@@ -1,3 +1,7 @@
+/**
+ * Menu component
+ * - navigation giữa lịch sử mua hàng, thay đổi thông tin đơn hàng, đăng xuất, đăng nhập.
+ */
 import React, { Component } from 'react';
 import {
     View,

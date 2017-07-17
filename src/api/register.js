@@ -1,3 +1,11 @@
+/**
+ * register:
+ * - đăng ký tài khoản khách hàng.
+ * - input: email, name, password.
+ * - output:
+ *  +Thành công: chuỗi text thông báo thành công.
+ *  +Thất bại: chuỗi text thông báo lỗi.
+ */
 import baseURL from './connect';
 const URL = `${baseURL}/api/register`;
 

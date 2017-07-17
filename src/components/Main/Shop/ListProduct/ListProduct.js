@@ -1,3 +1,7 @@
+/**
+ * ListProduct component:
+ * - render màn hình danh sách sản phẩm.
+ */
 import React, { Component } from 'react';
 import {
     View, Text, StyleSheet,

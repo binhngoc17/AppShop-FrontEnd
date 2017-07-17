@@ -1,3 +1,14 @@
+/**
+ * getNewToken:
+ * - lấy token mới.
+ * - input:token.
+ * - output:
+ *  +Thành công: token mới.
+ *  +Thất bại: chuỗi text thông báo lỗi.
+ * 
+ * refreshToken:
+ * - lưu token mới xuống bộ nhớ thiết bị.
+ */
 import getToken from './getToken';
 import saveToken from './saveToken';
 import baseURL from './connect';
@@ -20,15 +31,13 @@ const refreshToken = async () => {
     try {
         const token = await getToken();
         if (token === '' || token === 'TOKEN_KHONG_HOP_LE') {
-            console.log("*****************");
             console.log('khong lay duoc token');
         }
         const newToken = await getNewToken(token);
         await saveToken(newToken);
-        console.log("*****************");
         console.log('Token moi:' + newToken);
     } catch (error) {
-        console.log(error);
+        console.log("refreshToken: " + error);
     }
 };
 

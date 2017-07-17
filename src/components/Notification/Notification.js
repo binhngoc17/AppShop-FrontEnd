@@ -1,3 +1,7 @@
+/**
+ * Notification component:
+ * - Navigation giữa GreenScreen và RedScreen.
+ */
 import React, { Component } from 'react';
 import { View } from 'react-native';
 

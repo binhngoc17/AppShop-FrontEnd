@@ -1,3 +1,7 @@
+/**
+ * OrderHistory component:
+ * - render màn hình lịch sử mua hàng.
+ */
 import React, { Component } from 'react';
 import {
     View,

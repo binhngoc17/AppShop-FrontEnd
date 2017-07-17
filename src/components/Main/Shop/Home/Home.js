@@ -1,3 +1,7 @@
+/**
+ * Home component:
+ * - navigation giữa HomeView, ListProduct, ProductDetail.
+ */
 import React, { Component } from 'react';
 import {
     Navigator,

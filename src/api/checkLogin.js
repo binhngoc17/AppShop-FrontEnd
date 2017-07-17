@@ -1,3 +1,11 @@
+/**
+ * checkLogin:
+ * - Kiểm tra tình trạng đăng nhập của user.
+ * - Input: token.
+ * - Output:
+ *  +Thành công: token mới, thông tin user hiện tại.
+ *  +Thất bại: chuỗi text thông báo lỗi.
+ */
 import baseURL from './connect';
 const URL = `${baseURL}/api/check_login`;
 

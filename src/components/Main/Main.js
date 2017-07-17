@@ -1,3 +1,7 @@
+/**
+ * Main Component:
+ * - navigation giữa Menu và màn hình chính.
+ */
 import React, { Component } from 'react';
 import Drawer from 'react-native-drawer';
 import Menu from './Menu';

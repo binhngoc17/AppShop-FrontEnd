@@ -1,3 +1,7 @@
+/**
+ * FormOrder component:
+ * - render màn hình đặt hàng.
+ */
 import React, { Component } from 'react';
 import {
     View, Text, StyleSheet, TextInput,
@@ -182,15 +186,3 @@ const styles = StyleSheet.create({
     },
     iconStyle: { width: 20, height: 20 },
 });
-
-/**
- * <TextInput
-    style={inputStyle}
-    underlineColorAndroid='#90A4AE'
-    placeholder='1 tháng'
-    value={numMonth}
-    onChangeText={(text) => {
-        this.setState({ numMonth: parseInt(text) })
-    }}
-/>
- */

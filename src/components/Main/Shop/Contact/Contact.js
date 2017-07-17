@@ -1,3 +1,7 @@
+/**
+ * Contact component.
+ * - render màn hình liên hệ.
+ */
 import React, { Component } from 'react';
 import {
     View,

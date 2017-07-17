@@ -1,3 +1,8 @@
+/**
+ * Shop component
+ * - navigation giữa trang chủ, giỏ hàng, tìm kiếm, liên hệ, xử lý việc thêm xóa tăng giẩm số lượng sản phẩm
+ * trong giỏ hàng.
+ */
 import React, { Component } from 'react';
 import {
     View,

@@ -1,3 +1,7 @@
+/**
+ * Category component:
+ * - render cardview loại sản phẩm.
+ */
 import React, { Component } from 'react';
 import {
     View,

@@ -1,3 +1,7 @@
+/**
+ * cartview component:
+ * - render màn hình giỏ hàng.
+ */
 import React, { Component } from 'react';
 import {
     View,

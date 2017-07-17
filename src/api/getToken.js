@@ -1,3 +1,10 @@
+/**
+ * getToken:
+ * - lấy token từ bộ nhớ điện thoại.
+ * - output:
+ *  +Thành công: chuỗi token.
+ *  +Thất bại: chuỗi rỗng.
+ */
 import { AsyncStorage } from 'react-native';
 
 const getToken = async () => {
@@ -8,7 +15,7 @@ const getToken = async () => {
         }
         return '';
     } catch (error) {
-        console.log(error + 'n/co loi roi!!!');
+        console.log("getToken:" + error);
         return '';
     }
 };

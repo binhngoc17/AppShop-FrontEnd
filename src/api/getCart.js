@@ -1,3 +1,10 @@
+/**
+ * getCart:
+ * - Lấy danh sách sản phẩm trong giỏ hàng từ bộ nhớ thiết bị.
+ * - Output:
+ *  +Thành công: danh sách sản phẩm trong giỏ hàng.
+ *  +Thất bại: danh sách rỗng.
+ */
 import { AsyncStorage } from 'react-native';
 
 const getCart = async () => {
@@ -8,7 +15,7 @@ const getCart = async () => {
         }
         return [];
     } catch (error) {
-        console.log(error + 'n/co loi roi!!!');
+        console.log("getCartApi:" + error);
         return [];
     }
 };

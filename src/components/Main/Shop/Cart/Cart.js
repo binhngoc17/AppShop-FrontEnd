@@ -1,3 +1,7 @@
+/**
+ * Cart component
+ * - navigation giữa CartView, ProductDetail, FormOrder.
+ */
 import React, { Component } from 'react';
 import {
     Navigator,

@@ -1,3 +1,7 @@
+/**
+ * App Component:
+ * - điểm truy cập chính khi chạy ứng dụng, chứa navigation chính của ứng dụng, lấy token mới mỗi 60s
+ */
 import React, { Component } from 'react';
 import {
     Navigator,
@@ -12,7 +16,7 @@ import refreshToken from '../api/refreshToken';
 
 export default class App extends Component {
     componentDidMount() {
-        setInterval(refreshToken, 30000);
+        setInterval(refreshToken, 60000);
     }
     renderScene(route, navigator) {
         switch (route.name) {

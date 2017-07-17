@@ -1,3 +1,7 @@
+/**
+ * FormFastOrder Component
+ * - render màn hình đặt hàng nhanh.
+ */
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, Picker, ScrollView, TextInput, ToastAndroid, Alert } from 'react-native';
 

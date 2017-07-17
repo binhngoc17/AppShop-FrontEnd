@@ -1,3 +1,9 @@
+/**
+ * setUnitOnBill:
+ * - cập nhật tổng số lượng một sản phẩm trên tất cả các đơn hàng.
+ * - input: id sản phẩm.
+ * - Output: chuỗi text thông báo thành công hoặc có lỗi.
+ */
 import baseURL from './connect';
 
 const setUnitOnBill = (productId) => {

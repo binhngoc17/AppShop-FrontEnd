@@ -1,3 +1,11 @@
+/**
+ * login:
+ * - đăng nhập vào ứng dụng mua hàng.
+ * - input: email, password.
+ * - output:
+ *  +Thành công: token mới, thông tin user.
+ *  +Thất bại: chuỗi text thông báo lỗi.
+ */
 import baseURL from './connect';
 const URL = `${baseURL}/api/login`;
 

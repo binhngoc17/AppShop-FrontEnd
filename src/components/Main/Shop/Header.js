@@ -1,3 +1,7 @@
+/**
+ * Header component
+ * - render thanh tìm kiếm, nút menu, xử lý chức năng tìm kiếm.
+ */
 import React, { Component } from 'react';
 import {
     View,

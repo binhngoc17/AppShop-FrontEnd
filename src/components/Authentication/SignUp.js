@@ -1,3 +1,7 @@
+/**
+ * SignUp Component:
+ * - render màn hình đăng ký tài khoản.
+ */
 import React, { Component } from 'react';
 import { View, TextInput, Text, TouchableOpacity, StyleSheet, Alert, } from 'react-native';
 import register from '../../api/register';

@@ -1,3 +1,7 @@
+/**
+ * SignIn Component
+ * - render màn hình đăng nhập.
+ */
 import React, { Component } from 'react';
 import { View, TextInput, Text, TouchableOpacity, StyleSheet, Alert, ToastAndroid, } from 'react-native';
 import login from '../../api/login';

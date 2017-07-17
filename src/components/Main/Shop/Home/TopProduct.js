@@ -1,3 +1,7 @@
+/**
+ * TopProduct component:
+ * - render danh sách sản phẩm nổi bật.
+ */
 import React, { Component } from 'react';
 import {
     View,

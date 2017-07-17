@@ -1,3 +1,11 @@
+/**
+ * changeInfoApi:
+ * - thực hiện thông đổi thông tin user của khách hàng.
+ * -input: token, name, address, phone
+ * -output: 
+ *  +Thành công: JSON thông tin user hiện tại.
+ *  +Có lỗi: chuổi text thông báo lỗi.
+ */
 import baseURL from './connect';
 const URL = `${baseURL}/api/change_info`;
 

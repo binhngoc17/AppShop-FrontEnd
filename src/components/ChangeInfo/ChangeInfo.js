@@ -1,3 +1,7 @@
+/**
+ * ChangeInfo Component:
+ * - render màn hình thay đổi thông tin tài khoản.
+ */
 import React, { Component } from 'react';
 import {
     View,

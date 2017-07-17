@@ -1,3 +1,7 @@
+/**
+ * ProductDetail Component:
+ * - render màn hình chi tiết sản phẩm.
+ */
 import React, { Component } from 'react';
 import {
     View, Text, StyleSheet, TouchableOpacity,

@@ -1,3 +1,7 @@
+/**
+ * GreenScreen Component:
+ * - render màn hình chào.
+ */
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, Dimensions, } from 'react-native';
 

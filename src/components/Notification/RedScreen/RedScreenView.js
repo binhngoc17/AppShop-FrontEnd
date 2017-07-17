@@ -1,3 +1,7 @@
+/**
+ * RedScreenView Component
+ * - render màn hình nhắc mua hàng khi sản phẩm sắp hết.
+ */
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image } from 'react-native';
 

@@ -1,3 +1,7 @@
+/**
+ * HomeView component
+ * - render màn hình trang chủ chứa cardview loại sản phẩm và danh sách sản phẩm nổi bật.
+ */
 import React, { Component } from 'react';
 import {
     ScrollView,

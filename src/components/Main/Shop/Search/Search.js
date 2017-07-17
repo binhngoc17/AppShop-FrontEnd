@@ -1,3 +1,7 @@
+/**
+ * Search component:
+ * - navigation giữa SearchView và ProductDetail.
+ */
 import React, { Component } from 'react';
 import {
     Navigator,
