@@ -37,6 +37,7 @@ export default class FormFastOrder extends Component {
                     address: resJSON.addr.address,
                     district: resJSON.addr.district,
                     city: resJSON.addr.city,
+                    numMonth: resJSON.numMonth,
                     cartArray: [...resJSON.arrayDetail],
                 });
             })
@@ -46,6 +47,10 @@ export default class FormFastOrder extends Component {
         try {
             const token = await getToken();
             const { address, district, city, numMonth, cartArray } = this.state;
+            if(address == "" || district == "" || city == "") {
+                ToastAndroid.show('Vui lòng nhập địa chi giao hàng', ToastAndroid.SHORT);
+                return;
+            }
             const arrayDetail = cartArray.map(e => ({
                 id: e.id,
                 price: e.price,

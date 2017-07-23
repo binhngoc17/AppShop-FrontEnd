@@ -46,6 +46,10 @@ export default class CartView extends Component {
                     ToastAndroid.show('Vui lòng đăng nhập để tiếp tục', ToastAndroid.SHORT);
                     return;
                 }
+                if(this.props.cartArray.length == 0) {
+                    ToastAndroid.show('Giỏ hàng chưa có sản phẩm', ToastAndroid.SHORT);
+                    return;
+                }
                 this.props.navigator.push({ name: 'FORM_ORDER' });
             })
             .catch(err => console.log(err));

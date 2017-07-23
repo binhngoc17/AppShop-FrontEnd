@@ -47,6 +47,10 @@ export default class FormOrder extends Component {
         try {
             const token = await getToken();
             const { address, district, city, numMonth } = this.state;
+            if(address == "" || district == "" || city == "") {
+                ToastAndroid.show('Vui lòng nhập địa chi giao hàng', ToastAndroid.SHORT);
+                return;
+            }
             const { cartArray } = this.props;
             const arrayDetail = cartArray.map(e => ({
                 id: e.product.id,
