@@ -73,11 +73,11 @@ export default class Shop extends Component {
             () => saveCart(this.state.cartArray)
         );
     }
-    incrQuantity(productId) {
+    incrQuantity(productId, number = 1) {
         const newCart = this.state.cartArray.map(e => {
             if (e.product.id !== productId)
                 return e;
-            return { product: e.product, quantity: e.quantity + 1 };
+            return { product: e.product, quantity: e.quantity + number };
         });
         this.setState(
             {
@@ -86,13 +86,13 @@ export default class Shop extends Component {
             () => saveCart(this.state.cartArray)
         );
     }
-    decrQuantity(productId) {
+    decrQuantity(productId, number = 1) {
         const newCart = this.state.cartArray.map(e => {
             if (e.product.id !== productId)
                 return e;
-            if (e.quantity === 1)
+            if (e.quantity <= number)
                 return e;
-            return { product: e.product, quantity: e.quantity - 1 };
+            return { product: e.product, quantity: e.quantity - number };
         });
         this.setState(
             {

@@ -47,7 +47,7 @@ export default class FormFastOrder extends Component {
         try {
             const token = await getToken();
             const { address, district, city, numMonth, cartArray } = this.state;
-            if(address == "" || district == "" || city == "") {
+            if (address == "" || district == "" || city == "") {
                 ToastAndroid.show('Vui lòng nhập địa chi giao hàng', ToastAndroid.SHORT);
                 return;
             }
@@ -73,21 +73,21 @@ export default class FormFastOrder extends Component {
             console.log(error);
         }
     }
-    incrQuantity(productId) {
+    incrQuantity(productId, number = 1) {
         const newCart = this.state.cartArray.map(e => {
             if (e.id !== productId)
                 return e;
-            return { id: e.id, name: e.name, price: e.price, quantity: e.quantity + 1 };
+            return { id: e.id, name: e.name, price: e.price, quantity: e.quantity + number };
         });
         this.setState({ cartArray: newCart });
     }
-    decrQuantity(productId) {
+    decrQuantity(productId, number = 1) {
         const newCart = this.state.cartArray.map(e => {
             if (e.id !== productId)
                 return e;
-            if (e.quantity === 1)
+            if (e.quantity <= number)
                 return e;
-            return { id: e.id, name: e.name, price: e.price, quantity: e.quantity - 1 };
+            return { id: e.id, name: e.name, price: e.price, quantity: e.quantity - number };
         });
         this.setState({ cartArray: newCart });
     }
@@ -123,11 +123,17 @@ export default class FormFastOrder extends Component {
                             <View />
                         </View>
                         <View style={numberOfProduct}>
-                            <TouchableOpacity onPress={() => this.incrQuantity(e.id)}>
+                            <TouchableOpacity
+                                onPress={() => this.incrQuantity(e.id)}
+                                onLongPress={() => this.incrQuantity(e.id, 5)}
+                            >
                                 <Image source={iconAdd} style={{ width: 20, height: 20 }} />
                             </TouchableOpacity>
                             <Text style={titleStyle}>{e.quantity} kg</Text>
-                            <TouchableOpacity onPress={() => this.decrQuantity(e.id)}>
+                            <TouchableOpacity
+                                onPress={() => this.decrQuantity(e.id)}
+                                onLongPress={() => this.decrQuantity(e.id, 5)}
+                            >
                                 <Image source={iconMinus} style={{ width: 20, height: 20 }} />
                             </TouchableOpacity>
                         </View>

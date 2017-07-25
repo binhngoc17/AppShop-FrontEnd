@@ -27,11 +27,11 @@ function toTitleCase(str) {
 }
 
 export default class CartView extends Component {
-    incrQuantity(productId) {
-        global.incrQuantity(productId);
+    incrQuantity(productId, number) {
+        global.incrQuantity(productId, number);
     }
-    decrQuantity(productId) {
-        global.decrQuantity(productId);
+    decrQuantity(productId, number) {
+        global.decrQuantity(productId, number);
     }
     removeProduct(productId) {
         global.removeProduct(productId);
@@ -46,7 +46,7 @@ export default class CartView extends Component {
                     ToastAndroid.show('Vui lòng đăng nhập để tiếp tục', ToastAndroid.SHORT);
                     return;
                 }
-                if(this.props.cartArray.length == 0) {
+                if (this.props.cartArray.length == 0) {
                     ToastAndroid.show('Giỏ hàng chưa có sản phẩm', ToastAndroid.SHORT);
                     return;
                 }
@@ -83,11 +83,17 @@ export default class CartView extends Component {
                                 </View>
                                 <View style={productController}>
                                     <View style={numberOfProduct}>
-                                        <TouchableOpacity onPress={() => this.incrQuantity(cartItem.product.id)}>
+                                        <TouchableOpacity
+                                            onPress={() => this.incrQuantity(cartItem.product.id)}
+                                            onLongPress={() => this.incrQuantity(cartItem.product.id, 5)}
+                                        >
                                             <Image source={iconAdd} style={{ width: 20, height: 20 }} />
                                         </TouchableOpacity>
-                                        <Text style={txtQuantity}>{cartItem.quantity}</Text>
-                                        <TouchableOpacity onPress={() => this.decrQuantity(cartItem.product.id)}>
+                                        <Text style={txtQuantity}>{cartItem.quantity} kg</Text>
+                                        <TouchableOpacity
+                                            onPress={() => this.decrQuantity(cartItem.product.id)}
+                                            onLongPress={() => this.decrQuantity(cartItem.product.id, 5)}
+                                        >
                                             <Image source={iconMinus} style={{ width: 20, height: 20 }} />
                                         </TouchableOpacity>
                                     </View>
