@@ -31,6 +31,7 @@ export default class Main extends Component {
                 content={<Menu navigator={navigator} />}
                 tapToClose
                 openDrawerOffset={0.4}
+                tweenHandler={Drawer.tweenPresets.parallax}
             >
                 <Shop openDrawer={this.openControlPanel.bind(this)} />
             </Drawer>

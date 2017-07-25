@@ -188,5 +188,5 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontWeight: '400'
     },
-    iconStyle: { width: 20, height: 20 },
+    iconStyle: { width: 25, height: 25 },
 });

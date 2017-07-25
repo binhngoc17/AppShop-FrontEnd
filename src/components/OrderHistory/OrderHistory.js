@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     header: { flex: 1, backgroundColor: '#2ABB9C', alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row', paddingHorizontal: 10 },// eslint-disable-line
     headerTitle: { fontFamily: 'Avenir', color: '#fff', fontSize: 20 },
     backIconStyle: { width: 30, height: 30 },
-    iconStyle: { width: 15, height: 15 },
+    iconStyle: { width: 25, height: 25 },
     body: { flex: 10, backgroundColor: '#DFDFDF' },
     orderRow: {
         height: width / 2.5,

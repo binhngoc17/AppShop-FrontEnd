@@ -87,14 +87,14 @@ export default class CartView extends Component {
                                             onPress={() => this.incrQuantity(cartItem.product.id)}
                                             onLongPress={() => this.incrQuantity(cartItem.product.id, 5)}
                                         >
-                                            <Image source={iconAdd} style={{ width: 20, height: 20 }} />
+                                            <Image source={iconAdd} style={iconStyle} />
                                         </TouchableOpacity>
                                         <Text style={txtQuantity}>{cartItem.quantity} kg</Text>
                                         <TouchableOpacity
                                             onPress={() => this.decrQuantity(cartItem.product.id)}
                                             onLongPress={() => this.decrQuantity(cartItem.product.id, 5)}
                                         >
-                                            <Image source={iconMinus} style={{ width: 20, height: 20 }} />
+                                            <Image source={iconMinus} style={iconStyle} />
                                         </TouchableOpacity>
                                     </View>
                                     <TouchableOpacity style={showDetailContainer} onPress={() => this.gotoProductDetail(cartItem.product)}>
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#DFDFDF'
     },
-    iconStyle: { width: 15, height: 15 },
+    iconStyle: { width: 25, height: 25 },
     checkoutButton: {
         height: 50,
         margin: 10,
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
     },
     txtShowDetail: {
         color: '#C21C70',
-        fontSize: 13,
+        fontSize: 15,
         fontWeight: '400',
         fontFamily: 'Avenir',
         textAlign: 'right',

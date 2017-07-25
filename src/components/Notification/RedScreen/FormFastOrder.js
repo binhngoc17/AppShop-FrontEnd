@@ -127,14 +127,14 @@ export default class FormFastOrder extends Component {
                                 onPress={() => this.incrQuantity(e.id)}
                                 onLongPress={() => this.incrQuantity(e.id, 5)}
                             >
-                                <Image source={iconAdd} style={{ width: 20, height: 20 }} />
+                                <Image source={iconAdd} style={iconStyle} />
                             </TouchableOpacity>
                             <Text style={titleStyle}>{e.quantity} kg</Text>
                             <TouchableOpacity
                                 onPress={() => this.decrQuantity(e.id)}
                                 onLongPress={() => this.decrQuantity(e.id, 5)}
                             >
-                                <Image source={iconMinus} style={{ width: 20, height: 20 }} />
+                                <Image source={iconMinus} style={iconStyle} />
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -262,5 +262,5 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontWeight: '400'
     },
-    iconStyle: { width: 20, height: 20 },
+    iconStyle: { width: 25, height: 25 },
 });

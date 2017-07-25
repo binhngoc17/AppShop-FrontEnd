@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     },
     txtShowDetail: {
         color: '#C21C70',
-        fontSize: 13,
+        fontSize: 15,
         fontWeight: '400',
         fontFamily: 'Avenir',
         textAlign: 'right',

@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
     txtShowDetail: {
         fontFamily: 'Avenir',
         color: '#B10D65',
-        fontSize: 13
+        fontSize: 15
     },
     centering: {
         alignItems: 'center',
