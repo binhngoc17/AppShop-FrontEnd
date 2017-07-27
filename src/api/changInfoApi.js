@@ -1,6 +1,6 @@
 /**
  * changeInfoApi:
- * - thực hiện thông đổi thông tin user của khách hàng.
+ * - thực hiện thay đổi thông tin user của khách hàng.
  * -input: token, name, address, phone
  * -output: 
  *  +Thành công: JSON thông tin user hiện tại.
