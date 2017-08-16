@@ -34,7 +34,7 @@ This is a project to make a Rice shopping mobile application for VietNamese peop
 ![dathangnhanh_2](https://user-images.githubusercontent.com/22593946/29357881-603e8edc-82a3-11e7-860f-d500400dec31.png)
 
 
-**[Video demo](https://www.youtube.com/watch?v=mdlFhbE_LRc)**
+**[Video demo](https://www.youtube.com/watch?v=GCevBaCZUaI&list=PL8RlCzeE57JhK5sfgGUpp4y_qt-5GU58G)**
 
 ## Getting Started
 
