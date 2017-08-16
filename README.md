@@ -5,7 +5,7 @@ This is a project to make a Rice shopping mobile application for VietNamese peop
 ## Features
 
 * Authentication: sign in, sign up, change account information, sign out.
-* Shopping: View cart, add product to shopping cart, delete product from cart, change product quantity, order, cancel order, order quickly according to purchase history, product search, view product catalogs, view featured products, view product details, view shop information.
+* Shopping: view cart, add product to shopping cart, delete product from cart, change product quantity, order, cancel order, order quickly according to purchase history, product search, view product catalogs, view featured products, view product details, view shop information.
 * Track time of rice use: countdown day to use all the products, prompted to buy more products.
 
 ## Screenshots
