@@ -1,6 +1,6 @@
 # AppShop-FrontEnd
 
-This is a project to make a Rice shopping mobile application for VietNamese people.
+This is a project to make a Rice shopping mobile application for Vietnamese people.
 
 ## Features
 
